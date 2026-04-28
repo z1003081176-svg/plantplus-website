@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>植加招聘 | PlantPlus</title>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<style>
+:root {
+    --pp-green: #16A34A;
+    --pp-green-dark: #15803D;
+    --pp-green-light: #4BC28A;
+    --pp-green-bright: #22C55E;
+    --pp-yellow: #D4D83A;
+    --pp-cream: #F5F3E8;
+    --pp-bg: #EDEFE8;
+    --pp-text: #1a3d2a;
+    --pp-gray: #6b7c73;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+    color: var(--pp-text);
+    background: #fff;
+    overflow-x: hidden;
+}
+.pp-wordmark { font-weight: 900; line-height: 0.85; letter-spacing: -0.02em; font-family: "Helvetica Neue", Arial, sans-serif; }
+.pp-wordmark .line1, .pp-wordmark .line2 { display: block; }
+.pp-wordmark .dot { color: var(--pp-yellow); }
+
+/* ===== NAV ===== */
+.top-bar { background: white; padding: 20px 40px; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 24px; position: sticky; top: 0; z-index: 1000; }
+.nav-left-group { display: flex; align-items: center; gap: 48px; justify-self: stretch; padding-right: 32px; }
+.nav-left-group .nav-hamburger { margin-right: -30px; }
+.nav-left-group .nav-lang { margin-right: auto; }
+.nav-right-group { display: flex; align-items: center; gap: 48px; justify-self: stretch; padding-left: 32px; }
+.nav-right-group .nav-search-pill { margin-left: auto; }
+.nav-hamburger { width: 18px; height: 14px; background: transparent; border: none; display: flex; flex-direction: column; justify-content: space-between; cursor: pointer; padding: 0; }
+.nav-hamburger span { display: block; height: 2px; width: 100%; background: var(--pp-text); }
+.nav-link { color: var(--pp-green); text-decoration: none; font-weight: 500; font-size: 14px; letter-spacing: 0.5px; transition: opacity .2s; white-space: nowrap; }
+.nav-link:hover { opacity: 0.7; }
+.nav-link.active { color: var(--pp-green-dark); font-weight: 700; }
+.nav-center { justify-self: center; color: var(--pp-green); }
+.nav-center .pp-wordmark { font-size: 22px; }
+.nav-search-pill { display: inline-flex; align-items: center; gap: 8px; color: var(--pp-green); text-decoration: none; font-size: 13px; padding: 10px 24px; background: #fff; border: 2px solid var(--pp-green); border-radius: 999px; transition: all .2s; min-width: 120px; }
+.nav-search-pill:hover { background: var(--pp-green); color: #fff; }
+
+/* ===== Auto-hide on scroll-down nav ===== */
+.top-bar { transition: transform 0.35s ease, box-shadow 0.3s ease; will-change: transform; }
+.top-bar.nav-scrolled { box-shadow: 0 2px 12px rgba(0,0,0,0.08); }
+.top-bar.nav-hidden { transform: translateY(-100%); }
+
+/* ===== HERO — [需求3] 多图轮播 ===== */
+.hero {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1190 / 500;
+    background: #0a1a12;
+    overflow: hidden;
+}
+.hero-slide {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 0.6s ease;
+    z-index: 1;
+}
+.hero-slide.active { opacity: 1; z-index: 2; }
+
+/* ===== Bottom bar-style nav — hover-triggered (no click needed) ===== */
+.hero-bars {
+    position: absolute;
+    bottom: 36px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 14px;
+    z-index: 10;
+}
+.hero-bars .bar {
+    width: 80px;
+    height: 8px;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.35);
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.hero-bars .bar:hover { background: rgba(255,255,255,0.7); transform: scaleY(1.15); }
+.hero-bars .bar.active {
+    width: 120px;
+    background: var(--pp-yellow);
+}
+
+/* ===== VALUES + 我们在找 section (deep green) ===== */
+.values-section { background: var(--pp-green); padding: 80px 80px 60px; }
+.values-inner { max-width: 1600px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1.05fr; gap: 60px; align-items: stretch; }
+.values-card { background: white; border-radius: 16px; min-height: 380px; padding: 56px 48px 40px; position: relative; }
+.values-card .tag { position: absolute; top: 24px; left: 50%; transform: translateX(-50%); padding: 6px 20px; border: 1.5px solid var(--pp-green); color: var(--pp-green); font-size: 12px; font-weight: 800; letter-spacing: 2px; border-radius: 999px; }
+.values-card h3 { font-size: 24px; font-weight: 900; line-height: 1.5; letter-spacing: -0.01em; color: var(--pp-text); margin-bottom: 28px; margin-top: 20px; }
+.values-list { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 28px; margin-top: 12px; }
+.values-list .vrow { display: flex; align-items: center; gap: 10px; padding: 10px 0; border-top: 1px solid #e0e5e2; font-size: 13px; font-weight: 700; color: var(--pp-text); }
+.values-list .vrow:first-child, .values-list .vrow:nth-child(2) { border-top: none; }
+.values-list .num { color: var(--pp-green); font-weight: 900; font-size: 11px; letter-spacing: 1px; min-width: 20px; }
+.values-right { display: flex; flex-direction: column; justify-content: flex-start; color: white; padding-top: 12px; }
+.values-right h2 { font-size: 48px; font-weight: 900; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 28px; }
+.values-right h2 .accent { color: var(--pp-yellow); }
+.looking-list { display: flex; flex-direction: column; gap: 8px; }
+.looking-row { display: flex; align-items: center; gap: 16px; padding: 14px 24px; background: white; color: var(--pp-text); font-size: 14px; font-weight: 600; border-radius: 8px; }
+.looking-row .arrow { margin-left: auto; color: var(--pp-green); font-weight: 900; }
+
+/* ===== Open roles section — cream / light beige ===== */
+.roles-section { background: #E9ECE3; padding: 60px 80px 100px; position: relative; }
+.roles-inner { max-width: 1600px; margin: 0 auto; }
+.roles-header { text-align: center; padding: 24px 0 40px; position: relative; }
+.roles-header .kicker { display: inline-block; padding: 6px 18px; background: #fff; color: var(--pp-green); font-size: 11px; font-weight: 800; letter-spacing: 2.5px; text-transform: uppercase; border-radius: 999px; margin-bottom: 18px; }
+.roles-header h2 { font-size: 44px; font-weight: 900; letter-spacing: -0.02em; color: var(--pp-text); }
+.roles-header h2 .accent { color: var(--pp-green); }
+
+.roles-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.role-card { background: white; padding: 24px 22px; min-height: 200px; display: flex; flex-direction: column; justify-content: space-between; cursor: pointer; transition: transform .2s, box-shadow .2s; border-radius: 10px; }
+.role-card:hover { transform: translateY(-4px); box-shadow: 0 12px 30px -12px rgba(0,0,0,0.15); }
+.role-card .num { font-size: 28px; font-weight: 900; color: var(--pp-green); letter-spacing: -0.02em; line-height: 1; }
+.role-card .cat { font-size: 10px; font-weight: 800; letter-spacing: 2px; color: var(--pp-gray); text-transform: uppercase; margin-top: 10px; }
+.role-card h4 { font-size: 17px; font-weight: 900; color: var(--pp-text); letter-spacing: -0.01em; line-height: 1.3; margin-top: 14px; }
+.role-card .footer-row { display: flex; justify-content: space-between; align-items: center; padding-top: 14px; margin-top: 14px; border-top: 1px solid #ecefed; font-size: 11px; font-weight: 700; color: var(--pp-gray); letter-spacing: 0.5px; }
+.role-card .footer-row .apply { color: var(--pp-green); font-weight: 900; letter-spacing: 1px; }
+
+.role-featured { grid-column: 2 / 4; background: var(--pp-green); color: white; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px; text-align: center; min-height: 200px; border-radius: 10px; }
+.role-featured-pill { display: inline-block; padding: 8px 24px; border: 1.5px solid var(--pp-yellow); color: var(--pp-yellow); font-size: 12px; font-weight: 800; letter-spacing: 3px; margin-bottom: 16px; border-radius: 999px; }
+.role-featured h3 { font-size: 24px; font-weight: 900; letter-spacing: -0.01em; line-height: 1.3; }
+.role-featured p { font-size: 12px; line-height: 1.7; margin-top: 10px; opacity: 0.9; max-width: 320px; }
+
+/* ===== FOOTER ===== */
+.footer-new { background: var(--pp-green); color: white; padding: 72px 80px 320px; position: relative; overflow: hidden; }
+.footer-new-inner { max-width: 1760px; margin: 0 auto; display: grid; grid-template-columns: 1.2fr 2.5fr; gap: 80px; padding-bottom: 56px; position: relative; z-index: 2; }
+.footer-new-logo { margin-bottom: 14px; }
+.footer-new-logo .pp-wordmark { color: white; font-size: 36px; }
+.footer-new-slogan { font-size: 11px; font-weight: 600; letter-spacing: 2.5px; opacity: 0.9; margin-bottom: 28px; text-transform: uppercase; }
+.footer-new-contact { display: flex; flex-direction: column; gap: 14px; font-size: 12px; line-height: 1.7; opacity: 0.9; max-width: 380px; }
+.contact-block { display: flex; flex-direction: column; gap: 2px; }
+.contact-block strong { font-size: 11px; font-weight: 700; letter-spacing: 0.5px; margin-bottom: 2px; color: white; }
+.contact-block span { font-size: 10.5px; opacity: 0.85; line-height: 1.5; }
+.footer-new-links { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; padding-top: 4px; }
+.footer-new-col h4 { font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: white; margin-bottom: 18px; }
+.footer-new-col ul { list-style: none; }
+.footer-new-col li { margin-bottom: 8px; }
+.footer-new-col a { color: white; text-decoration: none; font-size: 12px; opacity: 0.9; transition: opacity .2s; }
+.footer-new-col a:hover { opacity: 1; }
+.footer-new-watermark { font-size: 320px; font-weight: 900; line-height: 0.85; letter-spacing: -0.03em; color: rgba(255,255,255,0.22); position: absolute; left: 50%; transform: translateX(-50%); bottom: 60px; z-index: 1; white-space: nowrap; pointer-events: none; font-family: "Helvetica Neue", Arial, sans-serif; }
+.footer-new-bottom { max-width: 1760px; margin: 0 auto; padding: 16px 0 0; border-top: 1px solid rgba(255,255,255,0.2); display: flex; justify-content: space-between; align-items: center; font-size: 12px; opacity: 0.9; position: absolute; left: 80px; right: 80px; bottom: 24px; z-index: 3; flex-wrap: wrap; gap: 12px; }
+.footer-bottom-left, .footer-bottom-right, .footer-bottom-center { font-size: 10px; }
+
+@media (max-width: 1024px) {
+    .top-bar { grid-template-columns: 1fr; padding: 16px 24px; }
+    .nav-left-group, .nav-right-group { display: none; }
+    .values-section, .roles-section { padding: 60px 24px; }
+    .values-inner { grid-template-columns: 1fr; gap: 32px; }
+    .values-right h2 { font-size: 32px; }
+    .roles-grid { grid-template-columns: 1fr 1fr; }
+    .role-featured { grid-column: 1 / -1; }
+    .footer-new { padding: 60px 24px 200px; }
+    .footer-new-inner { grid-template-columns: 1fr; gap: 40px; }
+    .footer-new-links { grid-template-columns: repeat(2, 1fr); }
+    .footer-new-watermark { font-size: 120px; bottom: 100px; }
+    .footer-new-bottom { position: static; flex-direction: column; gap: 10px; }
+}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel" src="components/logo.jsx"></script>
+<script type="text/babel" src="components/icons.jsx"></script>
+<script type="text/babel">
+
+const IMG = {
+  hero: 'images/150ppi/151ppi/%E8%B5%84%E6%BA%90%206.jpg', // 资源 6 — recruitment banner
+};
+
+// [需求3] Hero 轮播：占位图用手头的素材，等真实图到位替换即可
+const HERO_SLIDES = [
+  'images/150ppi/151ppi/%E8%B5%84%E6%BA%90%206.jpg',  // 资源 6 — 招聘 banner（含海报文案）
+  'images/150ppi/export%20(1).jpg',                    // export (1) — 温室群像
+  'images/150ppi/151ppi/%E8%B5%84%E6%BA%90%202.jpg',  // 资源 2 — 植物场景
+];
+
+const { useState: useState_c, useEffect: useEffect_c } = React;
+
+function HeroCarousel() {
+  const [idx, setIdx] = useState_c(0);
+  const [paused, setPaused] = useState_c(false);
+  const total = HERO_SLIDES.length;
+
+  useEffect_c(() => {
+    if (paused) return;
+    const t = setInterval(() => setIdx(i => (i + 1) % total), 4500);
+    return () => clearInterval(t);
+  }, [paused, total]);
+
+  return (
+    <section className="hero"
+             onMouseEnter={() => setPaused(true)}
+             onMouseLeave={() => setPaused(false)}>
+      {HERO_SLIDES.map((src, i) => (
+        <img key={i} src={src} alt=""
+             className={`hero-slide ${i === idx ? 'active' : ''}`} />
+      ))}
+      <div className="hero-bars">
+        {HERO_SLIDES.map((_, i) => (
+          <button key={i}
+                  className={`bar ${i === idx ? 'active' : ''}`}
+                  onMouseEnter={() => setIdx(i)}
+                  aria-label={`Slide ${i + 1}`} />
+        ))}
+      </div>
+    </section>
+  );
+}
+
+const VALUES = [
+  { num: '01', text: '诚实守信' },
+  { num: '02', text: '结果导向' },
+  { num: '03', text: '长期主义' },
+  { num: '04', text: '工匠精神' },
+  { num: '05', text: '客户优先' },
+  { num: '06', text: '保持好奇' },
+];
+
+const LOOKING = [
+  '能把事情做到 80 分以上的专业手艺人',
+  '对植物、产品、生活方式真正有热情的人',
+  '愿意去丽水 / 杭州扎根 1–2 年的人',
+  '习惯用数据和结果说话，而不是只讲努力',
+  '关于行业链对话的能力，对跨文化的热情',
+];
+
+const ROLES = [
+  { num: '01', cat: '产品研发', name: '高级结构工程师' },
+  { num: '02', cat: '海外销售', name: 'Amazon 运营专员' },
+  { num: '03', cat: '品牌市场', name: '品牌内容主管' },
+  { num: '04', cat: '工厂运营', name: '生产计划经理' },
+  { num: '05', cat: '工业设计', name: '资深工业设计师' },
+  { num: '06', cat: '供应链', name: '海外仓物流主管' },
+];
+
+function Nav() {
+  return (
+    <nav className="top-bar">
+      <div className="nav-left-group">
+        <button className="nav-hamburger" aria-label="menu"><span></span><span></span><span></span></button>
+        <a href="#" className="nav-link nav-lang">语言</a>
+        <a href="PlantPlus Company.html" className="nav-link">关于植加</a>
+        <a href="PlantPlus Products.html" className="nav-link">系列产品</a>
+      </div>
+      <div className="nav-center">
+        <a href="PlantPlus Homepage.html" style={{textDecoration:'none',color:'inherit'}}>
+          <PPWordmark size={26} />
+        </a>
+      </div>
+      <div className="nav-right-group">
+        <a href="PlantPlus Careers.html" className="nav-link active">植加招聘</a>
+        <a href="PlantPlus Contact.html" className="nav-link">合作联系</a>
+        <a href="#" className="nav-search-pill">
+          <SearchIcon size={14} />
+          <span>搜索</span>
+        </a>
+      </div>
+    </nav>
+  );
+}
+
+function Footer() {
+  return (
+    <footer className="footer-new">
+      <div className="footer-new-inner">
+        <div className="footer-new-left">
+          <div className="footer-new-logo"><PPWordmark size={40} color="white" /></div>
+          <div className="footer-new-slogan">LET PLANT LIGHTS UP PEOPLE'S LIFE</div>
+          <div className="footer-new-contact">
+            <div className="contact-block">
+              <strong>Lishui Office</strong>
+              <span>8th Floor, Building 2, Green Valley Information Industry Park,</span>
+              <span>Liandu District, Lishui City, Zhejiang Province, China</span>
+            </div>
+            <div className="contact-block">
+              <strong>Hangzhou Office</strong>
+              <span>Room 1704, Tower A, Yuecui Victory Centre,</span>
+              <span>Shangcheng District, Hangzhou City, Zhejiang Province, China</span>
+            </div>
+            <div className="contact-block">
+              <span>PlantPlus01@hotmail.com</span>
+              <span>+86 188 5808 7141</span>
+            </div>
+          </div>
+        </div>
+        <div className="footer-new-links">
+          <div className="footer-new-col">
+            <h4>PRODUCTS</h4>
+            <ul>
+              <li><a href="PlantPlus Products.html">Plant Stand</a></li>
+              <li><a href="PlantPlus Products.html">Plant Pot</a></li>
+              <li><a href="PlantPlus Products.html">Gardening Tool</a></li>
+              <li><a href="PlantPlus Products.html">Wall Plant Shelf</a></li>
+              <li><a href="PlantPlus Products.html">Watering Can</a></li>
+            </ul>
+          </div>
+          <div className="footer-new-col">
+            <h4>MORE</h4>
+            <ul>
+              <li><a href="#">Green House</a></li>
+              <li><a href="#">Grow Light</a></li>
+              <li><a href="#">Plant Caddy</a></li>
+              <li><a href="#">Electric Sprayer</a></li>
+            </ul>
+          </div>
+          <div className="footer-new-col">
+            <h4>COMPANY</h4>
+            <ul>
+              <li><a href="PlantPlus Company.html">About PlantPlus</a></li>
+              <li><a href="#">Manufacturing</a></li>
+              <li><a href="#">Global Presence</a></li>
+              <li><a href="#">Vision &amp; Mission</a></li>
+            </ul>
+          </div>
+          <div className="footer-new-col">
+            <h4>BUSINESS</h4>
+            <ul>
+              <li><a href="#">Wholesale</a></li>
+              <li><a href="#">OEM</a></li>
+              <li><a href="#">ODM</a></li>
+              <li><a href="#">Download Catalog</a></li>
+              <li><a href="PlantPlus Contact.html">Contact Sales</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div className="footer-new-watermark">PlantPlus</div>
+      <div className="footer-new-bottom">
+        <div className="footer-bottom-left">● Global · English</div>
+        <div className="footer-bottom-center">© 2026 PlantPlus Technology Co., Ltd. All rights reserved.</div>
+        <div className="footer-bottom-right">浙ICP备 2024 01234号</div>
+      </div>
+    </footer>
+  );
+}
+
+function ValuesSection() {
+  return (
+    <section className="values-section">
+      <div className="values-inner">
+        <div className="values-card">
+          <div className="tag">价值观</div>
+          <h3>坚持做长期正确的事 —<br/>诚实、较真、持续进步</h3>
+          <div className="values-list">
+            {VALUES.map(v => (
+              <div className="vrow" key={v.num}>
+                <span className="num">{v.num}</span>
+                <span>{v.text}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="values-right">
+          <h2>我们<span className="accent">在找:</span></h2>
+          <div className="looking-list">
+            {LOOKING.map((l, i) => (
+              <div className="looking-row" key={i}>
+                <span>{l}</span>
+                <span className="arrow">→</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function RolesSection() {
+  const cards = ROLES.slice(0, 4);
+  const more = ROLES.slice(4, 6);
+  return (
+    <section className="roles-section">
+      <div className="roles-inner">
+        <div className="roles-header">
+          <div className="kicker">OPEN ROLES · 在招岗位</div>
+          <h2>6 个岗位，<span className="accent">正在等你</span></h2>
+        </div>
+
+        <div className="roles-grid">
+          {cards.map(r => (
+            <div className="role-card" key={r.num}>
+              <div>
+                <div className="num">{r.num}</div>
+                <div className="cat">{r.cat}</div>
+                <h4>{r.name}</h4>
+              </div>
+              <div className="footer-row">
+                <span>Full-time</span>
+                <span className="apply">立即申请 →</span>
+              </div>
+            </div>
+          ))}
+
+          <div className="role-featured">
+            <div className="role-featured-pill">在招岗位</div>
+            <h3>查看 20+ 个在招岗位</h3>
+            <p>我们在多个团队持续招人 — 欢迎把简历投给我们，或扫码添加 HR 微信。</p>
+          </div>
+
+          {more.map(r => (
+            <div className="role-card" key={r.num}>
+              <div>
+                <div className="num">{r.num}</div>
+                <div className="cat">{r.cat}</div>
+                <h4>{r.name}</h4>
+              </div>
+              <div className="footer-row">
+                <span>Full-time</span>
+                <span className="apply">立即申请 →</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function App() {
+  return (
+    <>
+      <Nav />
+      <HeroCarousel />
+      <ValuesSection />
+      <RolesSection />
+      <Footer />
+    </>
+  );
+}
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<App />);
+</script>
+<script>
+  (function() {
+    var lastY = window.scrollY;
+    function onScroll() {
+      var bar = document.querySelector('.top-bar');
+      if (!bar) return;
+      var cur = window.scrollY;
+      if (cur < 60) {
+        bar.classList.remove('nav-hidden');
+        bar.classList.remove('nav-scrolled');
+      } else {
+        bar.classList.add('nav-scrolled');
+        if (cur > lastY + 4) bar.classList.add('nav-hidden');
+        else if (cur < lastY - 4) bar.classList.remove('nav-hidden');
+      }
+      lastY = cur;
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('load', onScroll);
+  })();
+</script>
+</body>
+</html>

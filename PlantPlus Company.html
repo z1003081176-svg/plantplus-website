@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>关于 PlantPlus | 公司介绍</title>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<style>
+:root {
+    --pp-green: #16A34A;
+    --pp-green-dark: #15803D;
+    --pp-green-light: #4BC28A;
+    --pp-green-bright: #22C55E;
+    --pp-yellow: #D4D83A;
+    --pp-cream: #F5F3E8;
+    --pp-bg: #EDEFE8;
+    --pp-text: #1a3d2a;
+    --pp-gray: #6b7c73;
+    --pp-band: #DDE3DD;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+    color: var(--pp-text);
+    background: #fff;
+    overflow-x: hidden;
+}
+.pp-wordmark { font-weight: 900; line-height: 0.85; letter-spacing: -0.02em; font-family: "Helvetica Neue", Arial, sans-serif; }
+.pp-wordmark .line1, .pp-wordmark .line2 { display: block; }
+.pp-wordmark .dot { color: var(--pp-yellow); }
+
+/* ===== NAV ===== */
+.top-bar { background: white; padding: 20px 40px; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 24px; position: sticky; top: 0; z-index: 1000; }
+.nav-left-group { display: flex; align-items: center; gap: 48px; justify-self: stretch; padding-right: 32px; }
+.nav-left-group .nav-hamburger { margin-right: -30px; }
+.nav-left-group .nav-lang { margin-right: auto; }
+.nav-right-group { display: flex; align-items: center; gap: 48px; justify-self: stretch; padding-left: 32px; }
+.nav-right-group .nav-search-pill { margin-left: auto; }
+.nav-hamburger { width: 18px; height: 14px; background: transparent; border: none; display: flex; flex-direction: column; justify-content: space-between; cursor: pointer; padding: 0; }
+.nav-hamburger span { display: block; height: 2px; width: 100%; background: var(--pp-text); }
+.nav-link { color: var(--pp-green); text-decoration: none; font-weight: 500; font-size: 14px; letter-spacing: 0.5px; transition: opacity .2s; white-space: nowrap; }
+.nav-link:hover { opacity: 0.7; }
+.nav-link.active { color: var(--pp-green-dark); font-weight: 700; }
+.nav-center { justify-self: center; color: var(--pp-green); }
+.nav-center .pp-wordmark { font-size: 22px; }
+.nav-search-pill { display: inline-flex; align-items: center; gap: 8px; color: var(--pp-green); text-decoration: none; font-size: 13px; padding: 10px 24px; background: #fff; border: 2px solid var(--pp-green); border-radius: 999px; transition: all .2s; min-width: 120px; }
+.nav-search-pill:hover { background: var(--pp-green); color: #fff; }
+
+/* ===== Auto-hide on scroll-down nav ===== */
+.top-bar { transition: transform 0.35s ease, box-shadow 0.3s ease; will-change: transform; }
+.top-bar.nav-scrolled { box-shadow: 0 2px 12px rgba(0,0,0,0.08); }
+.top-bar.nav-hidden { transform: translateY(-100%); }
+
+/* ===== INTRO ===== */
+.intro-section { display: grid; grid-template-columns: 1fr 1fr; min-height: 560px; background: var(--pp-green-dark); }
+.intro-left { background: var(--pp-green-dark); color: white; padding: 72px 72px 72px 80px; }
+.intro-left h1 { font-size: 40px; font-weight: 900; line-height: 1.2; letter-spacing: -0.015em; margin-bottom: 10px; }
+.intro-left .intro-subtitle { font-size: 18px; font-weight: 700; opacity: 0.95; margin-bottom: 52px; letter-spacing: -0.01em; }
+.intro-section-block { margin-bottom: 24px; max-width: 520px; }
+.intro-section-heading { font-size: 13px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: var(--pp-yellow); margin-bottom: 10px; padding-bottom: 6px; border-bottom: 1.5px solid rgba(255,255,255,0.3); }
+.intro-section-block p { font-size: 13px; line-height: 1.7; opacity: 0.95; font-weight: 500; }
+.intro-right { position: relative; overflow: hidden; padding: 0; background: var(--pp-green-dark); }
+.intro-right img { display: block; width: 100%; height: 100%; object-fit: cover; border-radius: 48px 0 0 48px; }
+
+/* ===== MISSION & VISION ===== */
+.mv-section { background: var(--pp-green-bright); padding: 100px 80px; }
+.mv-inner { max-width: 1600px; margin: 0 auto; }
+.mv-header { text-align: center; margin-bottom: 56px; position: relative; }
+.mv-title { font-size: 56px; font-weight: 900; line-height: 1.1; letter-spacing: -0.025em; color: white; }
+.mv-spark { position: absolute; color: var(--pp-yellow); }
+.mv-spark.top { top: -24px; right: 32%; }
+.mv-spark.bottom { bottom: -20px; left: 32%; }
+.mv-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.mv-card { padding: 48px 44px; min-height: 320px; display: flex; flex-direction: column; position: relative; border-radius: 14px; }
+.mv-card-green  { background: var(--pp-green); color: white; }
+.mv-card-white  { background: #FFFFFF; color: var(--pp-text); }
+.mv-card-yellow { background: var(--pp-yellow); color: var(--pp-text); }
+.mv-card-num { font-size: 64px; font-weight: 900; letter-spacing: -0.03em; line-height: 1; margin-bottom: 28px; }
+.mv-card-green  .mv-card-num { color: var(--pp-yellow); }
+.mv-card-white  .mv-card-num { color: var(--pp-green); }
+.mv-card-yellow .mv-card-num { color: var(--pp-green-dark); }
+.mv-card-kicker { font-size: 22px; font-weight: 800; letter-spacing: 0.5px; margin-bottom: 18px; }
+.mv-card-title { font-size: 20px; font-weight: 600; line-height: 1.5; letter-spacing: 0; margin-bottom: 0; opacity: 0.9; }
+.mv-card-desc { display: none; }
+
+/* ===== VALUES + R&D GRID ===== */
+.values-rnd { background: #E9ECE3; padding: 100px 80px; }
+.values-rnd-inner { max-width: 1600px; margin: 0 auto; }
+.vr-row { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px; }
+.vr-card { padding: 48px; min-height: 260px; position: relative; display: flex; flex-direction: column; justify-content: center; border-radius: 10px; background: #F3F5F0; }
+.vr-card-big { font-size: 28px; font-weight: 800; color: var(--pp-text); line-height: 1.4; letter-spacing: -0.01em; }
+.vr-card-num { position: absolute; top: 36px; right: 44px; font-size: 32px; font-weight: 900; color: var(--pp-yellow); letter-spacing: -0.02em; line-height: 1; }
+.vr-card-spark { position: absolute; top: 36px; left: 44px; color: var(--pp-yellow); }
+.vr-list { display: flex; flex-direction: column; gap: 10px; padding-top: 48px; }
+.vr-list-head { font-size: 14px; font-weight: 800; letter-spacing: 1px; color: var(--pp-green); margin-bottom: 4px; }
+.vr-list-item { font-size: 14px; font-weight: 600; color: var(--pp-text); display: flex; align-items: center; gap: 8px; }
+.vr-list-item::before { content: ''; width: 6px; height: 6px; background: var(--pp-yellow); border-radius: 50%; flex-shrink: 0; }
+.vr-card-desc { font-size: 13px; line-height: 1.8; color: var(--pp-gray); padding-top: 48px; }
+
+/* ===== FOOTER ===== */
+.footer-new { background: var(--pp-green); color: white; padding: 72px 80px 320px; position: relative; overflow: hidden; }
+.footer-new-inner { max-width: 1760px; margin: 0 auto; display: grid; grid-template-columns: 1.2fr 2.5fr; gap: 80px; padding-bottom: 56px; position: relative; z-index: 2; }
+.footer-new-logo { margin-bottom: 14px; }
+.footer-new-logo .pp-wordmark { color: white; font-size: 36px; }
+.footer-new-slogan { font-size: 11px; font-weight: 600; letter-spacing: 2.5px; opacity: 0.9; margin-bottom: 28px; text-transform: uppercase; }
+.footer-new-contact { display: flex; flex-direction: column; gap: 14px; font-size: 12px; line-height: 1.7; opacity: 0.9; max-width: 380px; }
+.contact-block { display: flex; flex-direction: column; gap: 2px; }
+.contact-block strong { font-size: 11px; font-weight: 700; letter-spacing: 0.5px; margin-bottom: 2px; color: white; }
+.contact-block span { font-size: 10.5px; opacity: 0.85; line-height: 1.5; }
+.footer-new-links { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; padding-top: 4px; }
+.footer-new-col h4 { font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: white; margin-bottom: 18px; }
+.footer-new-col ul { list-style: none; }
+.footer-new-col li { margin-bottom: 8px; }
+.footer-new-col a { color: white; text-decoration: none; font-size: 12px; opacity: 0.9; transition: opacity .2s; }
+.footer-new-col a:hover { opacity: 1; }
+.footer-new-watermark { font-size: 320px; font-weight: 900; line-height: 0.85; letter-spacing: -0.03em; color: rgba(255,255,255,0.22); position: absolute; left: 50%; transform: translateX(-50%); bottom: 60px; z-index: 1; white-space: nowrap; pointer-events: none; font-family: "Helvetica Neue", Arial, sans-serif; }
+.footer-new-bottom { max-width: 1760px; margin: 0 auto; padding: 16px 0 0; border-top: 1px solid rgba(255,255,255,0.2); display: flex; justify-content: space-between; align-items: center; font-size: 12px; opacity: 0.9; position: absolute; left: 80px; right: 80px; bottom: 24px; z-index: 3; flex-wrap: wrap; gap: 12px; }
+.footer-bottom-left, .footer-bottom-right, .footer-bottom-center { font-size: 10px; }
+
+@media (max-width: 1024px) {
+    .top-bar { grid-template-columns: 1fr; padding: 16px 24px; }
+    .nav-left-group, .nav-right-group { display: none; }
+    .intro-section { grid-template-columns: 1fr; }
+    .intro-left { padding: 48px 32px; }
+    .intro-right { min-height: 320px; }
+    .intro-right img { border-radius: 0; }
+    .mv-section, .values-rnd { padding: 60px 24px; }
+    .mv-title { font-size: 36px; }
+    .mv-grid { grid-template-columns: 1fr; }
+    .vr-row { grid-template-columns: 1fr; }
+    .footer-new { padding: 60px 24px 200px; }
+    .footer-new-inner { grid-template-columns: 1fr; gap: 40px; }
+    .footer-new-links { grid-template-columns: repeat(2, 1fr); }
+    .footer-new-watermark { font-size: 120px; bottom: 100px; }
+    .footer-new-bottom { position: static; flex-direction: column; gap: 10px; }
+}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel" src="components/logo.jsx"></script>
+<script type="text/babel" src="components/icons.jsx"></script>
+<script type="text/babel">
+
+const IMG = {
+  introRight: 'images/150ppi/151ppi/%E8%B5%84%E6%BA%90%207.jpg', // 资源 7 — greenhouse / shelf scene
+};
+
+function Nav() {
+  return (
+    <nav className="top-bar">
+      <div className="nav-left-group">
+        <button className="nav-hamburger" aria-label="menu"><span></span><span></span><span></span></button>
+        <a href="#" className="nav-link nav-lang">语言</a>
+        <a href="PlantPlus Company.html" className="nav-link active">关于植加</a>
+        <a href="PlantPlus Products.html" className="nav-link">系列产品</a>
+      </div>
+      <div className="nav-center">
+        <a href="PlantPlus Homepage.html" style={{textDecoration:'none',color:'inherit'}}>
+          <PPWordmark size={26} />
+        </a>
+      </div>
+      <div className="nav-right-group">
+        <a href="PlantPlus Careers.html" className="nav-link">植加招聘</a>
+        <a href="PlantPlus Contact.html" className="nav-link">合作联系</a>
+        <a href="#" className="nav-search-pill">
+          <SearchIcon size={14} />
+          <span>搜索</span>
+        </a>
+      </div>
+    </nav>
+  );
+}
+
+function Sparkle({ size = 32 }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 56 56" fill="none">
+      <g stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+        <path d="M28 6 L28 18"/><path d="M28 38 L28 50"/>
+        <path d="M6 28 L18 28"/><path d="M38 28 L50 28"/>
+        <path d="M13 13 L21 21"/><path d="M35 35 L43 43"/>
+        <path d="M43 13 L35 21"/><path d="M21 35 L13 43"/>
+      </g>
+    </svg>
+  );
+}
+
+function Footer() {
+  return (
+    <footer className="footer-new">
+      <div className="footer-new-inner">
+        <div className="footer-new-left">
+          <div className="footer-new-logo"><PPWordmark size={40} color="white" /></div>
+          <div className="footer-new-slogan">LET PLANT LIGHTS UP PEOPLE'S LIFE</div>
+          <div className="footer-new-contact">
+            <div className="contact-block">
+              <strong>Lishui Office</strong>
+              <span>8th Floor, Building 2, Green Valley Information Industry Park,</span>
+              <span>Liandu District, Lishui City, Zhejiang Province, China</span>
+            </div>
+            <div className="contact-block">
+              <strong>Hangzhou Office</strong>
+              <span>Room 1704, Tower A, Yuecui Victory Centre,</span>
+              <span>Shangcheng District, Hangzhou City, Zhejiang Province, China</span>
+            </div>
+            <div className="contact-block">
+              <span>PlantPlus01@hotmail.com</span>
+              <span>+86 188 5808 7141</span>
+            </div>
+          </div>
+        </div>
+        <div className="footer-new-links">
+          <div className="footer-new-col">
+            <h4>PRODUCTS</h4>
+            <ul>
+              <li><a href="PlantPlus Products.html">Plant Stand</a></li>
+              <li><a href="PlantPlus Products.html">Plant Pot</a></li>
+              <li><a href="PlantPlus Products.html">Gardening Tool</a></li>
+              <li><a href="PlantPlus Products.html">Wall Plant Shelf</a></li>
+              <li><a href="PlantPlus Products.html">Watering Can</a></li>
+            </ul>
+          </div>
+          <div className="footer-new-col">
+            <h4>MORE</h4>
+            <ul>
+              <li><a href="#">Green House</a></li>
+              <li><a href="#">Grow Light</a></li>
+              <li><a href="#">Plant Caddy</a></li>
+              <li><a href="#">Electric Sprayer</a></li>
+            </ul>
+          </div>
+          <div className="footer-new-col">
+            <h4>COMPANY</h4>
+            <ul>
+              <li><a href="PlantPlus Company.html">About PlantPlus</a></li>
+              <li><a href="#">Manufacturing</a></li>
+              <li><a href="#">Global Presence</a></li>
+              <li><a href="#">Vision &amp; Mission</a></li>
+            </ul>
+          </div>
+          <div className="footer-new-col">
+            <h4>BUSINESS</h4>
+            <ul>
+              <li><a href="#">Wholesale</a></li>
+              <li><a href="#">OEM</a></li>
+              <li><a href="#">ODM</a></li>
+              <li><a href="#">Download Catalog</a></li>
+              <li><a href="PlantPlus Contact.html">Contact Sales</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div className="footer-new-watermark">PlantPlus</div>
+      <div className="footer-new-bottom">
+        <div className="footer-bottom-left">● Global · English</div>
+        <div className="footer-bottom-center">© 2026 PlantPlus Technology Co., Ltd. All rights reserved.</div>
+        <div className="footer-bottom-right">浙ICP备 2024 01234号</div>
+      </div>
+    </footer>
+  );
+}
+
+function App() {
+  return (
+    <>
+      <Nav />
+
+      {/* ===== INTRO ===== */}
+      <section className="intro-section">
+        <div className="intro-left">
+          <h1>浙江植加科技有限公司</h1>
+          <div className="intro-subtitle">你的一站式园艺解决方案伙伴</div>
+
+          <div className="intro-section-block">
+            <div className="intro-section-heading">公司简介</div>
+            <p>植加科技成立于 2018 年，是一家以室内园艺产品为主营业务的一体化制造与贸易企业 — 秉承"让植物点亮人类生活"的企业使命，植加已从家居园艺用品发展至涵盖植物周边全品类的综合性园艺解决方案提供商，集研发、生产与全球销售于一体。</p>
+          </div>
+          <div className="intro-section-block">
+            <div className="intro-section-heading">一体化生产优势</div>
+            <p>作为真正意义上的工厂直供全球化企业，植加科技拥有两大配套齐全的自主生产基地，可对整个生产过程实施全链路品控。</p>
+          </div>
+          <div className="intro-section-block">
+            <div className="intro-section-heading">企业愿景</div>
+            <p>打造具有全球影响力的园艺品牌，重新定义人们在日常生活中与植物互动与欣赏的方式；提供一站式园艺解决方案，让养护变得简单、愉悦、有成就感 — 服务从园艺小白到资深玩家的每一位用户。</p>
+          </div>
+        </div>
+        <div className="intro-right">
+          <img src={IMG.introRight} alt="PlantPlus greenhouse scene" />
+        </div>
+      </section>
+
+      {/* ===== MISSION / VISION / VALUES ===== */}
+      <section className="mv-section">
+        <div className="mv-inner">
+          <div className="mv-header">
+            <span className="mv-spark top"><Sparkle size={28}/></span>
+            <h2 className="mv-title">让植物<br/>点亮人类生活</h2>
+            <span className="mv-spark bottom"><Sparkle size={28}/></span>
+          </div>
+          <div className="mv-grid">
+            <div className="mv-card mv-card-green">
+              <div className="mv-card-num">01</div>
+              <div className="mv-card-kicker">使命</div>
+              <h3 className="mv-card-title">让植物点亮人类生活</h3>
+            </div>
+            <div className="mv-card mv-card-white">
+              <div className="mv-card-num">02</div>
+              <div className="mv-card-kicker">愿景</div>
+              <h3 className="mv-card-title">成为全球第一的<br/>园艺企业</h3>
+            </div>
+            <div className="mv-card mv-card-yellow">
+              <div className="mv-card-num">03</div>
+              <div className="mv-card-kicker">愿景</div>
+              <h3 className="mv-card-title">打造精神与物质生活<br/>的富裕组织</h3>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ===== KEEP REAL + R&D ===== */}
+      <section className="values-rnd">
+        <div className="values-rnd-inner">
+        <div className="vr-row">
+          <div className="vr-card">
+            <span className="vr-card-spark"><Sparkle size={22}/></span>
+            <div className="vr-list">
+              <div className="vr-list-head">Keep Real</div>
+              <div className="vr-list-item">爱</div>
+              <div className="vr-list-item">让正直的人做正确的事</div>
+              <div className="vr-list-item">与真人共事，让天下人不孤独</div>
+              <div className="vr-list-item">与人远志</div>
+              <div className="vr-list-item">让优秀的伙伴更加优秀</div>
+              <div className="vr-list-item">持续学习</div>
+            </div>
+          </div>
+          <div className="vr-card">
+            <span className="vr-card-num">01</span>
+            <span className="vr-card-spark"><Sparkle size={22}/></span>
+            <div className="vr-card-big">100+人<br/>团队价值观</div>
+          </div>
+        </div>
+
+        <div className="vr-row">
+          <div className="vr-card">
+            <span className="vr-card-spark"><Sparkle size={22}/></span>
+            <div className="vr-card-big">20 人研发团队<br/>40+ 项授权专利</div>
+          </div>
+          <div className="vr-card">
+            <span className="vr-card-num">02</span>
+            <span className="vr-card-spark"><Sparkle size={22}/></span>
+            <p className="vr-card-desc">我们具备系统化的园艺产品开发能力，围绕家居园艺、花园和专业场的园艺解决方案 5 大产品系列开发，持续推进可持续设计、品质感以及市场竞争力的园艺产品解决方案。</p>
+          </div>
+        </div>
+        </div>
+      </section>
+
+      <Footer />
+    </>
+  );
+}
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<App />);
+</script>
+<script>
+  (function() {
+    var lastY = window.scrollY;
+    function onScroll() {
+      var bar = document.querySelector('.top-bar');
+      if (!bar) return;
+      var cur = window.scrollY;
+      if (cur < 60) {
+        bar.classList.remove('nav-hidden');
+        bar.classList.remove('nav-scrolled');
+      } else {
+        bar.classList.add('nav-scrolled');
+        if (cur > lastY + 4) bar.classList.add('nav-hidden');
+        else if (cur < lastY - 4) bar.classList.remove('nav-hidden');
+      }
+      lastY = cur;
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('load', onScroll);
+  })();
+</script>
+</body>
+</html>
