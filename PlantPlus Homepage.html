@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=1920, initial-scale=0.195, minimum-scale=0.195, user-scalable=yes">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PlantPlus | Let Plant Lights Up People's Life</title>
 <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
@@ -56,8 +56,6 @@ body {
 }
 .design-canvas {
     width: 1920px;
-    max-width: 1920px;
-    overflow-x: hidden;
     margin: 0 auto;
     background: #fff;
     position: relative;
@@ -707,6 +705,252 @@ textarea {
     width: 288px;       /* 96px → 288px(约 3 倍) */
     right: 64px;
     bottom: 64px;
+}
+
+/* ============================================================
+   Mobile — 横板缩小版(保持电脑端的横向布局结构,只缩小元素尺寸)
+   ============================================================ */
+@media (max-width: 768px) {
+    /* ----- 全局禁止横向滚动 ----- */
+    html, body { overflow-x: hidden; }
+    .design-canvas {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+
+    /* ----- Nav ----- */
+    .top-bar {
+        padding: 8px 12px;
+        gap: 8px;
+    }
+    .nav-left-group, .nav-right-group { gap: 10px; padding: 0; }
+    .nav-link {
+        font-size: 9px;
+        letter-spacing: 0.2px;
+    }
+    .nav-logo-img { height: 24px; }
+    .nav-search-pill {
+        padding: 4px 10px;
+        font-size: 9px;
+        min-width: 0;
+        gap: 4px;
+        border-width: 1px;
+    }
+    .nav-hamburger { width: 14px; height: 11px; margin-right: 0; }
+
+    /* ----- Hero — 保持 40/60 左右两栏 ----- */
+    .hero-split {
+        grid-template-columns: 40% 60%;
+        min-height: 280px;
+        height: auto;
+        align-items: stretch;
+    }
+    .hero-split-left {
+        min-height: 280px;
+        padding: 20px 12px;
+        gap: 12px;
+        align-items: flex-start;
+        justify-content: center;
+        text-align: left;
+    }
+    .hero-split-title {
+        font-size: 18px;
+        line-height: 1.25;
+        text-align: left;
+        white-space: normal;
+    }
+    .hero-pill-btn {
+        width: auto;
+        height: 32px;
+        padding: 0 14px;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.3px;
+        align-self: flex-start;
+    }
+    .hero-split-right {
+        min-height: 280px;
+        height: 280px;
+    }
+    .hero-split-right img,
+    .hero-split-right svg {
+        position: absolute !important;
+        height: 100% !important;
+        min-height: 0 !important;
+        border-radius: 24px 0 0 24px !important;
+    }
+
+    /* ----- Map — 保持 1fr 1.1fr 左右两栏 ----- */
+    .map-section { padding: 32px 16px; }
+    .map-inner {
+        grid-template-columns: 1fr 1.1fr;
+        gap: 16px;
+    }
+    .map-kicker {
+        font-size: 11px;
+        letter-spacing: 0.3px;
+        margin-bottom: 8px;
+    }
+    .map-title {
+        font-size: 20px;
+        line-height: 1.2;
+        margin-bottom: 10px;
+    }
+    .map-desc {
+        font-size: 10px;
+        line-height: 1.5;
+        max-width: none;
+    }
+    .map-right { min-height: auto; }
+    .map-sparkle { width: 28px; top: -14px; right: 4px; }
+    .map-stats {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px 16px;
+        margin: 20px 0 0;
+        max-width: none;
+    }
+    .stat-card { padding: 4px 8px; border-left-width: 2px; }
+    .stat-label {
+        font-size: 10px;
+        margin-bottom: 4px;
+        letter-spacing: 0.2px;
+    }
+    .stat-value { font-size: 18px; }
+    .stat-value span { font-size: 9px; margin-left: 2px; }
+
+    /* ----- Grid — 保持 5 列横排 ----- */
+    .grid-section { padding: 16px 0; }
+    .grid-row {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 0;
+        overflow: visible;
+        padding: 0;
+    }
+    .grid-cell {
+        aspect-ratio: 2 / 5;
+        flex: none;
+    }
+    .grid-btn {
+        padding: 6px 12px;
+        font-size: 10px;
+        font-weight: 600;
+        left: 4%;
+        bottom: 4%;
+        letter-spacing: 0.2px;
+        right: auto;
+        width: auto;
+        height: auto;
+        min-height: 0;
+    }
+
+    /* ----- Two cards — 保持 1fr 1fr ----- */
+    .twocards-section {
+        grid-template-columns: 1fr 1fr;
+        padding: 16px 12px;
+        gap: 8px;
+        max-width: 100%;
+    }
+    .twocard {
+        min-height: 180px;
+        border-radius: 3px;
+    }
+    .twocard-title {
+        font-size: 12px;
+        line-height: 1.35;
+        letter-spacing: 0.02em;
+    }
+    .twocard-btn-top {
+        padding: 6px 12px;
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 0.3px;
+        top: 12px;
+        right: 12px;
+    }
+    .twocard-watermark {
+        font-size: 16px;
+        top: 10px;
+        left: 12px;
+    }
+    .twocard-body {
+        padding: 0 12px 12px;
+    }
+
+    /* ----- Footer — 保持左 logo 右 4 列 ----- */
+    .footer-new {
+        padding: 24px 16px;
+    }
+    .footer-new-inner {
+        grid-template-columns: 1.2fr 2.5fr;
+        gap: 16px;
+        max-width: 100%;
+        padding-bottom: 24px;
+    }
+    .footer-new-logo {
+        width: 80px;
+        height: 26px;
+    }
+    .footer-new-slogan {
+        font-size: 8px;
+        margin: 8px 0 12px;
+        letter-spacing: 0.6px;
+    }
+    .footer-new-contact {
+        gap: 8px;
+        font-size: 8px;
+        max-width: 100%;
+    }
+    .contact-block { gap: 1px; }
+    .contact-block strong {
+        font-size: 8px;
+        margin-bottom: 1px;
+        letter-spacing: 0.1px;
+    }
+    .contact-block span {
+        font-size: 7.5px;
+        line-height: 1.4;
+    }
+    .footer-new-links {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 8px;
+    }
+    .footer-new-col h4 {
+        font-size: 8px;
+        margin-bottom: 8px;
+        letter-spacing: 0.4px;
+    }
+    .footer-new-col ul { gap: 4px; }
+    .footer-new-col li { margin-bottom: 4px; }
+    .footer-new-col a {
+        font-size: 8px;
+        letter-spacing: 0.1px;
+    }
+    .footer-new-watermark {
+        font-size: 60px;
+        bottom: 12px;
+        opacity: 0.18;
+    }
+    .footer-sparkle {
+        width: 48px;
+        right: 12px;
+        bottom: 12px;
+    }
+    .footer-new-bottom {
+        position: static;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+        font-size: 7.5px;
+        margin-top: 12px;
+        padding-top: 8px;
+        left: auto;
+        right: auto;
+        bottom: auto;
+    }
+    .footer-bottom-left,
+    .footer-bottom-right { font-size: 7.5px; }
 }
 
 </style>
