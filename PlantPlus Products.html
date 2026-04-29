@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=1920, initial-scale=0.195, minimum-scale=0.195, user-scalable=yes">
 <title>系列产品 | PlantPlus</title>
 <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
@@ -19,6 +19,7 @@
     --pp-gray: #6b7c73;
 }
 * { margin: 0; padding: 0; box-sizing: border-box; }
+html { overflow-x: hidden; }
 body {
     font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
     color: var(--pp-text);
@@ -137,7 +138,7 @@ body {
 }
 
 /* ===== FOOTER ===== */
-.footer-new { background: var(--pp-green); color: white; padding: 72px 80px 320px; position: relative; overflow: hidden; }
+.footer-new { background: var(--pp-green); color: white; padding: 72px 80px 320px; position: relative; overflow: hidden; box-sizing: border-box; }
 .footer-new-inner { max-width: 1760px; margin: 0 auto; display: grid; grid-template-columns: 1.2fr 2.5fr; gap: 80px; padding-bottom: 56px; position: relative; z-index: 2; }
 .footer-new-logo { margin-bottom: 14px; }
 .footer-new-logo .pp-wordmark { color: white; font-size: 36px; }
@@ -156,18 +157,6 @@ body {
 .footer-new-bottom { max-width: 1760px; margin: 0 auto; padding: 16px 0 0; border-top: 1px solid rgba(255,255,255,0.2); display: flex; justify-content: space-between; align-items: center; font-size: 12px; opacity: 0.9; position: absolute; left: 80px; right: 80px; bottom: 24px; z-index: 3; flex-wrap: wrap; gap: 12px; }
 .footer-bottom-left, .footer-bottom-right, .footer-bottom-center { font-size: 10px; }
 
-@media (max-width: 1024px) {
-    .top-bar { grid-template-columns: 1fr; padding: 16px 24px; }
-    .nav-left-group, .nav-right-group { display: none; }
-    .cat-label { font-size: 14px; padding: 10px 28px; letter-spacing: 3px; }
-    .gallery-section { padding: 60px 24px; }
-    .gallery-grid { grid-template-columns: 1fr; grid-template-rows: 200px 200px 200px; }
-    .footer-new { padding: 60px 24px 200px; }
-    .footer-new-inner { grid-template-columns: 1fr; gap: 40px; }
-    .footer-new-links { grid-template-columns: repeat(2, 1fr); }
-    .footer-new-watermark { font-size: 120px; bottom: 100px; }
-    .footer-new-bottom { position: static; flex-direction: column; gap: 10px; }
-}
 </style>
 </head>
 <body>

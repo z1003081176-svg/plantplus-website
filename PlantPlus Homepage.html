@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=1920, initial-scale=0.195, minimum-scale=0.195, user-scalable=yes">
 <title>PlantPlus | Let Plant Lights Up People's Life</title>
 <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
@@ -47,6 +47,7 @@
     --pp-gray: #6b7c73;
 }
 * { margin: 0; padding: 0; box-sizing: border-box; }
+html { overflow-x: hidden; }
 body {
     font-family: 'Montserrat', "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
     color: var(--pp-text);
@@ -55,6 +56,8 @@ body {
 }
 .design-canvas {
     width: 1920px;
+    max-width: 1920px;
+    overflow-x: hidden;
     margin: 0 auto;
     background: #fff;
     position: relative;
@@ -315,6 +318,7 @@ body {
     gap: 28px;
     max-width: 1920px;
     margin: 0 auto;
+    box-sizing: border-box;
 }
 .twocard {
     position: relative;
@@ -393,6 +397,7 @@ body {
     padding: 80px 80px 80px;
     position: relative;
     overflow: hidden;
+    box-sizing: border-box;
 }
 .footer-new-inner {
     max-width: 1760px;
@@ -552,28 +557,6 @@ textarea {
     border-radius: 4px;
 }
 
-/* ===== Responsive ===== */
-@media (max-width: 1024px) {
-    .top-bar { grid-template-columns: auto 1fr auto; padding: 16px 20px; gap: 16px; }
-    .nav-left-group { gap: 16px; }
-    .nav-left-group .nav-link:not(.nav-lang) { display: none; }
-    .nav-right-group { gap: 16px; }
-    .nav-right-group .nav-link { display: none; }
-    .hero-split { grid-template-columns: 1fr; padding: 0; min-height: auto; }
-    .hero-split-left { padding: 40px 28px; min-height: auto; }
-    .hero-split-title { font-size: 40px; white-space: normal; }
-    .hero-split-right { min-height: 280px; }
-    .map-section { padding: 48px 20px; }
-    .map-inner { grid-template-columns: 1fr; gap: 32px; }
-    .map-title { font-size: 40px; }
-    .map-stats { grid-template-columns: 1fr 1fr; gap: 20px; }
-    .twocards-section { grid-template-columns: 1fr; }
-    .twocard-title { font-size: 26px; }
-    .footer-new { padding: 40px 20px 16px; }
-    .footer-new-inner { grid-template-columns: 1fr; gap: 32px; }
-    .footer-new-links { grid-template-columns: 1fr 1fr; }
-}
-
 /* ===== Grid row 横排修复 ===== */
 .grid-row {
     display: grid;
@@ -725,6 +708,7 @@ textarea {
     right: 64px;
     bottom: 64px;
 }
+
 </style>
 </head>
 <body>

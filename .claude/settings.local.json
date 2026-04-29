@@ -35,7 +35,8 @@
       "Bash(curl -sS -o /dev/null -w \"card_left: %{http_code}\\\\n\" \"http://localhost:8765/%E5%9B%BE%202x/%E7%94%BB%E6%9D%BF%2018%402x-100.jpg\")",
       "Bash(curl -sS -o /dev/null -w \"logo2: %{http_code}\\\\n\" \"http://localhost:8765/logo%202.png\")",
       "Bash(curl -sS -o /dev/null -w \"card14: %{http_code}\\\\n\" \"http://localhost:8765/%E5%9B%BE%202x/%E7%94%BB%E6%9D%BF%2014%402x-100.jpg\")",
-      "Bash(curl -sS -o /dev/null -w \"card15: %{http_code}\\\\n\" \"http://localhost:8765/%E5%9B%BE%202x/%E7%94%BB%E6%9D%BF%2015%402x-100.jpg\")"
+      "Bash(curl -sS -o /dev/null -w \"card15: %{http_code}\\\\n\" \"http://localhost:8765/%E5%9B%BE%202x/%E7%94%BB%E6%9D%BF%2015%402x-100.jpg\")",
+      "Bash(grep -E \"@media|^[0-9]+:}$\")"
     ]
   }
 }
