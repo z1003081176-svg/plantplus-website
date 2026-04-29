@@ -6,3 +6,5 @@
 *.fig
 .DS_Store
 node_modules/
+_homepage1_preview.pdf
+*.pdf

@@ -8,19 +8,47 @@
 <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
 <style>
+@font-face {
+    font-family: 'Montserrat';
+    src: url('Fonts/Montserrat-Medium-7.otf') format('opentype');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Montserrat';
+    src: url('Fonts/Montserrat-SemiBold-9.otf') format('opentype');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Montserrat';
+    src: url('Fonts/Montserrat-Bold-3.otf') format('opentype');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Montserrat';
+    src: url('Fonts/Montserrat-ExtraBold-4.otf') format('opentype');
+    font-weight: 800;
+    font-style: normal;
+    font-display: swap;
+}
 :root {
-    --pp-green: #16A34A;
-    --pp-green-dark: #15803D;
-    --pp-green-light: #4BC28A;
-    --pp-yellow: #D4D83A;
+    --pp-green: #1CAD76;
+    --pp-green-dark: #128A5F;
+    --pp-green-light: #4FC299;
+    --pp-yellow: #CDD200;
     --pp-cream: #F5F3E8;
     --pp-bg: #EDEFE8;
-    --pp-text: #1a3d2a;
+    --pp-text: #1a1a1a;
     --pp-gray: #6b7c73;
 }
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body {
-    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+    font-family: 'Montserrat', "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
     color: var(--pp-text);
     background: #fff;
     overflow-x: hidden;
@@ -67,15 +95,16 @@ body {
     color: var(--pp-green);
     text-decoration: none;
     font-weight: 500;
-    font-size: 14px;
-    letter-spacing: 0.5px;
+    font-size: 15px;
+    letter-spacing: 0.3px;
     transition: opacity .2s;
     white-space: nowrap;
+    font-family: 'Montserrat', "PingFang SC", "Microsoft YaHei", sans-serif;
 }
 .nav-link:hover { opacity: 0.7; }
 .nav-lang { color: var(--pp-green); }
-.nav-center { justify-self: center; color: var(--pp-green); }
-.nav-center .pp-wordmark { font-size: 22px; }
+.nav-center { justify-self: center; display: flex; align-items: center; }
+.nav-logo-img { height: 48px; width: auto; display: block; }
 .nav-search-pill {
     display: inline-flex;
     align-items: center;
@@ -97,7 +126,7 @@ body {
 .top-bar.nav-scrolled { box-shadow: 0 2px 12px rgba(0,0,0,0.08); }
 .top-bar.nav-hidden { transform: translateY(-100%); }
 
-/* ===== HERO ===== */
+/* ===== HERO — 单一干净版本 ===== */
 .hero-split {
     display: grid;
     grid-template-columns: 40% 60%;
@@ -124,21 +153,22 @@ body {
     line-height: 1.15;
     letter-spacing: 0.02em;
     margin-top: 0;
-    white-space: normal;
+    color: #fff;
+    font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
 }
 .hero-pill-btn {
     margin-top: auto;
     margin-bottom: 0;
     align-self: flex-start;
-    background: transparent;
-    color: white;
-    border: 1.5px solid rgba(255,255,255,0.9);
+    background: #fff;
+    color: var(--pp-green);
+    border: none;
     width: 260px;
     height: 64px;
     padding: 0;
     font-size: 18px;
-    font-weight: 500;
-    letter-spacing: 1.5px;
+    font-weight: 600;
+    letter-spacing: 1px;
     cursor: pointer;
     transition: all .2s;
     border-radius: 999px;
@@ -147,7 +177,7 @@ body {
     justify-content: center;
     text-decoration: none;
 }
-.hero-pill-btn:hover { background: white; color: var(--pp-green); }
+.hero-pill-btn:hover { background: var(--pp-green-dark); color: #fff; }
 .hero-split-right {
     position: relative;
     overflow: hidden;
@@ -178,48 +208,43 @@ body {
     align-items: flex-start;
 }
 .map-kicker {
-    font-size: 18px;
-    font-weight: 700;
+    font-size: 36px;
+    font-weight: 600;
     color: var(--pp-green);
-    letter-spacing: 3.5px;
+    letter-spacing: 1px;
     margin-bottom: 32px;
     text-transform: uppercase;
+    font-family: 'Montserrat', sans-serif;
 }
 .map-title {
     font-size: 72px;
     font-weight: 800;
-    line-height: 1.1;
-    letter-spacing: -0.02em;
-    margin-bottom: 32px;
-    color: #000;
+    line-height: 1.15;
+    letter-spacing: 0.02em;
+    margin-bottom: 36px;
+    color: #1a1a1a;
+    font-family: 'Montserrat', "PingFang SC", "Microsoft YaHei", sans-serif;
 }
-.map-title-hl {
-    color: var(--pp-green);
-}
+.map-title-hl { color: var(--pp-green); }
 .map-desc {
-    font-size: 15px;
-    line-height: 1.8;
-    color: #555;
-    max-width: 460px;
+    font-size: 16px;
+    line-height: 1.9;
+    color: #4a4a4a;
+    max-width: 480px;
+    font-family: 'Montserrat', "PingFang SC", "Microsoft YaHei", sans-serif;
 }
-.map-right {
-    position: relative;
-    min-height: 320px;
-}
-.map-footnote {
-    position: absolute;
-    right: 0;
-    bottom: -18px;
-    font-size: 10px;
-    color: #9aa699;
-    letter-spacing: 0.3px;
-}
+.map-image-wrap { width: 100%; }
+.map-image-wrap img { display: block; width: 100%; height: auto; }
+.map-right { position: relative; min-height: 320px; }
 .map-sparkle {
     position: absolute;
-    top: -10px;
-    right: 40px;
+    top: -56px;
+    right: -16px;
+    width: 80px;
+    z-index: 2;
+    pointer-events: none;
 }
-.map-svg { width: 100%; }
+.map-sparkle img { display: block; width: 100%; height: auto; }
 
 .map-stats {
     max-width: 720px;
@@ -235,153 +260,108 @@ body {
     position: relative;
 }
 .stat-label {
-    font-size: 16px;
-    color: var(--pp-green-dark);
+    font-size: 18px;
+    color: var(--pp-green);
     font-weight: 700;
-    margin-bottom: 14px;
-    letter-spacing: 0.2px;
+    margin-bottom: 16px;
+    letter-spacing: 0.3px;
+    font-family: 'Montserrat', sans-serif;
 }
 .stat-value {
-    font-size: 44px;
-    font-weight: 700;
-    color: var(--pp-text);
-    letter-spacing: -0.02em;
+    font-size: 56px;
+    font-weight: 600;
+    color: #1a1a1a;
+    letter-spacing: 0.01em;
+    font-family: 'Montserrat', sans-serif;
 }
 .stat-value span {
-    font-size: 18px;
+    font-size: 20px;
     font-weight: 500;
-    color: var(--pp-gray);
-    margin-left: 4px;
+    color: #888;
+    margin-left: 6px;
 }
 
 /* ===== IMAGE GRID ===== */
-.grid-section {
-    padding: 0 0 80px;
-    position: relative;
-}
-.grid-row {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 0;
-    max-width: 100%;
-    margin: 0 auto;
-    position: relative;
-}
+.grid-section { padding: 60px 0 60px; position: relative; }
+.grid-panel-wrap { position: relative; max-width: 100%; }
+.grid-panel-img { display: block; width: 100%; height: auto; }
 .grid-btn {
     position: absolute;
-    left: 32px;
-    bottom: 32px;
-    background: rgba(255,255,255,0.95);
+    left: 8%;
+    bottom: 8%;
+    padding: 16px 36px;
+    font-size: 18px;
+    font-weight: 600;
+    background: #fff;
     color: var(--pp-green);
     border: none;
-    padding: 14px 30px;
-    font-size: 15px;
-    font-weight: 500;
-    cursor: pointer;
     border-radius: 999px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     letter-spacing: 0.5px;
     z-index: 4;
-    backdrop-filter: blur(4px);
-    text-decoration: none;
-    display: inline-block;
+    transition: all .2s;
+    font-family: 'Montserrat', "PingFang SC", "Microsoft YaHei", sans-serif;
 }
-.grid-btn:hover { background: var(--pp-green); color: white; }
-.grid-cell {
-    aspect-ratio: 2 / 5;
-    overflow: hidden;
-    background: #e2e2d4;
-    position: relative;
-}
-.grid-cell svg,
-.grid-cell img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-.grid-panel-img {
-    display: block;
-    width: 100%;
-    height: auto;
-}
-.grid-row.grid-row-single { display: block; }
+.grid-btn:hover { background: var(--pp-green); color: #fff; }
 
 /* ===== TWO CARDS ===== */
 .twocards-section {
-    padding: 40px 80px 100px;
+    padding: 60px 64px 80px;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 24px;
+    gap: 28px;
     max-width: 1920px;
     margin: 0 auto;
 }
 .twocard {
-    background: #E8EDE3;
-    min-height: 380px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
     position: relative;
+    min-height: 440px;
     overflow: hidden;
-    border-radius: 2px;
+    border-radius: 6px;
+    background: #D7E4D8;
 }
-.twocard-photo {
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    opacity: 0.7;
-    transition: opacity 0.4s ease;
-}
-.twocard-photo svg,
+.twocard.twocard--right { background: #DCE3E5; }
+.twocard-photo { position: absolute; inset: 0; z-index: 1; }
 .twocard-photo img {
     display: block;
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: opacity .4s ease;
 }
-.twocard::after {
+.twocard::before {
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(135deg, rgba(232,237,227,0.55), rgba(232,237,227,0.3));
     z-index: 2;
-    opacity: 1;
-    transition: opacity 0.4s ease;
-    pointer-events: none;
+    background-image: url('%E5%9B%BE%202x/%E7%94%BB%E6%9D%BF%2014%402x-100.jpg');
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transition: opacity .4s ease;
 }
-
-/* ===== [需求2] 双卡 hover：图片变清晰、标题/水印淡出、按钮保留 ===== */
-.twocard:hover .twocard-photo { opacity: 1; }
-.twocard:hover::after { opacity: 0; }
-.twocard:hover .twocard-title { opacity: 0; }
-.twocard:hover .twocard-watermark { opacity: 0; }
-.twocard-watermark {
-    position: absolute;
-    top: 32px;
-    left: 40px;
-    font-size: 48px;
-    font-weight: 700;
-    color: rgba(255,255,255,0.75);
-    font-family: Georgia, serif;
-    font-style: italic;
-    letter-spacing: -0.02em;
-    z-index: 3;
-    line-height: 1;
-    transition: opacity 0.4s ease;
+.twocard.twocard--right::before {
+    background-image: url('%E5%9B%BE%202x/%E7%94%BB%E6%9D%BF%2015%402x-100.jpg');
 }
+.twocard:hover::before { opacity: 1; }
 .twocard-btn-top {
     position: absolute;
-    top: 32px;
-    right: 32px;
+    top: 36px;
+    right: 36px;
     background: var(--pp-green);
-    color: white;
+    color: #fff;
     border: none;
-    padding: 13px 32px;
-    font-size: 15px;
-    font-weight: 500;
+    padding: 18px 44px;
+    font-family: 'Montserrat', "PingFang SC", "Microsoft YaHei", sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 1px;
     cursor: pointer;
     border-radius: 999px;
-    z-index: 3;
+    z-index: 4;
     transition: all .2s;
     white-space: nowrap;
     text-decoration: none;
@@ -391,22 +371,26 @@ body {
 .twocard-body {
     position: relative;
     z-index: 3;
-    padding: 48px;
+    padding: 0 44px 40px;
     margin-top: auto;
+    transition: opacity .35s ease;
 }
+.twocard:hover .twocard-body { opacity: 0; }
 .twocard-title {
-    font-size: 38px;
+    font-size: 32px;
     font-weight: 700;
-    line-height: 1.3;
-    color: var(--pp-text);
-    transition: opacity 0.4s ease;
+    line-height: 1.4;
+    color: #1a1a1a;
+    letter-spacing: 0.02em;
+    transition: opacity .35s ease;
+    font-family: 'Montserrat', "PingFang SC", "Microsoft YaHei", sans-serif;
 }
 
 /* ===== FOOTER ===== */
 .footer-new {
     background: var(--pp-green);
     color: white;
-    padding: 72px 80px 320px;
+    padding: 80px 80px 80px;
     position: relative;
     overflow: hidden;
 }
@@ -416,41 +400,46 @@ body {
     display: grid;
     grid-template-columns: 1.2fr 2.5fr;
     gap: 80px;
-    padding-bottom: 56px;
     position: relative;
     z-index: 2;
 }
-.footer-new-logo { margin-bottom: 14px; }
-.footer-new-logo .pp-wordmark { color: white; font-size: 36px; }
+.footer-new-logo {
+    width: 200px;
+    height: 64px;
+    background: url('logo%202.png') no-repeat left center;
+    background-size: contain;
+    margin-bottom: 18px;
+}
+.footer-new-logo img { display: none; }
 .footer-new-slogan {
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 2.5px;
-    opacity: 0.9;
-    margin-bottom: 28px;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    margin-bottom: 40px;
     text-transform: uppercase;
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
 }
 .footer-new-contact {
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 18px;
     font-size: 12px;
     line-height: 1.7;
-    opacity: 0.9;
-    max-width: 380px;
+    max-width: 420px;
 }
 .contact-block { display: flex; flex-direction: column; gap: 2px; }
 .contact-block strong {
-    font-size: 11px;
+    font-size: 13px;
     font-weight: 700;
-    letter-spacing: 0.5px;
-    margin-bottom: 2px;
+    letter-spacing: 0.3px;
+    margin-bottom: 4px;
     color: white;
 }
 .contact-block span {
-    font-size: 10.5px;
-    opacity: 0.85;
-    line-height: 1.5;
+    font-size: 12px;
+    color: #fff;
+    line-height: 1.55;
 }
 .footer-new-links {
     display: grid;
@@ -459,61 +448,33 @@ body {
     padding-top: 4px;
 }
 .footer-new-col h4 {
-    font-size: 12px;
+    font-size: 16px;
     font-weight: 700;
-    letter-spacing: 2px;
+    letter-spacing: 1.5px;
     text-transform: uppercase;
     color: white;
-    margin-bottom: 18px;
+    margin-bottom: 32px;
+    font-family: 'Montserrat', sans-serif;
 }
 .footer-new-col ul { list-style: none; }
-.footer-new-col li { margin-bottom: 8px; }
+.footer-new-col li { margin-bottom: 16px; }
 .footer-new-col a {
     color: white;
     text-decoration: none;
-    font-size: 12px;
-    opacity: 0.9;
+    font-size: 14px;
     transition: opacity .2s;
+    font-family: 'Montserrat', sans-serif;
 }
-.footer-new-col a:hover { opacity: 1; }
-
-.footer-new-watermark {
-    font-size: 320px;
-    font-weight: 900;
-    line-height: 0.85;
-    letter-spacing: -0.03em;
-    color: rgba(255,255,255,0.22);
+.footer-new-col a:hover { opacity: 0.75; }
+.footer-sparkle {
     position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    bottom: 60px;
-    z-index: 1;
-    white-space: nowrap;
+    right: 64px;
+    bottom: 40px;
+    width: 64px;
+    z-index: 2;
     pointer-events: none;
-    font-family: "Helvetica Neue", Arial, sans-serif;
 }
-
-.footer-new-bottom {
-    max-width: 1760px;
-    margin: 0 auto;
-    padding: 16px 0 0;
-    border-top: 1px solid rgba(255,255,255,0.2);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 12px;
-    opacity: 0.9;
-    position: absolute;
-    left: 80px;
-    right: 80px;
-    bottom: 24px;
-    z-index: 3;
-    flex-wrap: wrap;
-    gap: 12px;
-}
-.footer-bottom-left, .footer-bottom-right { font-size: 10px; }
-.footer-bottom-right a { color: white; text-decoration: none; }
-.footer-bottom-right a:hover { opacity: 1; }
+.footer-sparkle img { width: 100%; height: auto; display: block; }
 
 /* ===== Scroll to top ===== */
 .scroll-top {
@@ -606,14 +567,163 @@ textarea {
     .map-inner { grid-template-columns: 1fr; gap: 32px; }
     .map-title { font-size: 40px; }
     .map-stats { grid-template-columns: 1fr 1fr; gap: 20px; }
-    .grid-row { grid-template-columns: repeat(2, 1fr); }
-    .grid-btn { position: static; margin: 16px auto 0; display: block; }
     .twocards-section { grid-template-columns: 1fr; }
     .twocard-title { font-size: 26px; }
     .footer-new { padding: 40px 20px 16px; }
     .footer-new-inner { grid-template-columns: 1fr; gap: 32px; }
     .footer-new-links { grid-template-columns: 1fr 1fr; }
-    .footer-new-bottom { flex-direction: column; gap: 8px; text-align: center; }
+}
+
+/* ===== Grid row 横排修复 ===== */
+.grid-row {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0;
+    position: relative;
+}
+.grid-cell {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 2 / 5;
+    background: #ececec;
+}
+.grid-cell img,
+.grid-cell svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* ===== 最终微调:Hero 标题/按钮 + 顶部接缝 ===== */
+
+/* 标题再大一点,整体往下压 */
+.hero-split-left {
+    padding: 160px 60px 140px 72px;   /* 上下 padding 加大,文字下移 */
+    justify-content: flex-start;       /* 标题贴上,按钮跟着标题不再撑到底 */
+    gap: 56px;                          /* 标题和按钮之间的间距 */
+}
+.hero-split-title {
+    font-size: 84px;                    /* 从 72px 加大到 84px */
+    line-height: 1.2;
+}
+
+/* 按钮变大、不再 push 到底部 */
+.hero-pill-btn {
+    margin-top: 0;                      /* 取消 auto,跟着标题排列 */
+    width: 300px;                       /* 从 260px 加大 */
+    height: 72px;                       /* 从 64px 加大 */
+    font-size: 20px;                    /* 从 18px 加大 */
+    font-weight: 700;
+}
+
+/* 顶部接缝:隐藏 hero 右侧图片左圆角(避免和导航栏交界处的视觉错位) */
+.hero-split-right {
+    overflow: hidden;
+}
+.hero-split-right img,
+.hero-split-right svg {
+    border-radius: 0;                   /* 去掉左圆角,左右图无缝拼接 */
+}
+
+/* ===== Hero 最终对齐:消除上下白边 + 按钮下移 ===== */
+
+/* 左右两块都用足够的高度,确保上下顶满,无白边 */
+.hero-split {
+    min-height: 760px;          /* 比内容总高度大,撑满 */
+    align-items: stretch;        /* 左右子块拉伸到一致高度 */
+}
+.hero-split-left {
+    min-height: 760px;
+    padding: 140px 60px 100px 72px;  /* 上 padding 减小,下 padding 增大,让按钮下移 */
+    gap: 80px;                   /* 标题和按钮之间间距加大 */
+}
+.hero-split-right {
+    min-height: 760px;
+}
+.hero-split-right img,
+.hero-split-right svg {
+    height: 100%;
+    min-height: 760px;
+    object-fit: cover;
+    object-position: center;
+}
+
+/* ===== Map desc 黄色 + 解锁更多空间按钮再放大一点 + 底部 light 放大 ===== */
+.map-desc {
+    color: var(--pp-yellow);
+    font-weight: 600;
+}
+
+.grid-btn {
+    padding: 20px 44px;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 0.6px;
+}
+
+.footer-sparkle {
+    width: 96px;
+    right: 48px;
+    bottom: 48px;
+}
+.footer-sparkle img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* ===== 终极修复:Hero 上下白边 ===== */
+/* 用 absolute 定位让图片强制撑满父容器,不依赖 height: 100% */
+
+.hero-split-right {
+    position: relative;
+    overflow: hidden;
+    background: var(--pp-green);
+}
+
+.hero-split-right img,
+.hero-split-right svg {
+    position: absolute !important;
+    top: 0;
+    left: 0;
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 0 !important;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 0 !important;
+    display: block;
+}
+
+/* 同时移除右侧图片底色干扰,让左右拼接更干净 */
+.hero-split-right {
+    background: transparent;
+}
+
+/* ===== Hero 椭圆过渡 + 按钮再下移 20px ===== */
+
+/* 加回右侧图片的左圆角(椭圆过渡效果) */
+.hero-split-right img,
+.hero-split-right svg {
+    border-radius: 48px 0 0 48px !important;
+}
+
+/* 让左侧绿块的右边缘也跟着图片的圆角弧度走,避免拼接处不齐 */
+.hero-split-right {
+    background: var(--pp-green);
+}
+
+/* 按钮再往下移 20px */
+.hero-split-left {
+    gap: 100px;   /* 从 80px 改成 100px,标题和按钮间距加大 20px */
+}
+
+/* ===== Footer light 放大到 3 倍 ===== */
+.footer-sparkle {
+    width: 288px;       /* 96px → 288px(约 3 倍) */
+    right: 64px;
+    bottom: 64px;
 }
 </style>
 </head>

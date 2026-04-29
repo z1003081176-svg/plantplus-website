@@ -31,7 +31,7 @@ function AnimatedNumber({ target, suffix = '', duration = 2000 }) {
 }
 
 const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
-  "primaryColor": "#16A34A",
+  "primaryColor": "#1CAD76",
   "accentColor": "#D4D83A",
   "heroTitle": "让植物\n点亮人类生活",
   "heroSub": "构建你的园艺空间",
@@ -42,10 +42,15 @@ const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
 
 // Real asset paths (URL-encoded for spaces / unicode safety)
 const IMG = {
-  hero: 'images/150ppi/export%20(1).jpg',
-  gridPanel: 'images/150ppi/151ppi/%E8%B5%84%E6%BA%90%201.jpg', // 资源 1.jpg — 5-panel plant shots
-  office:   'images/150ppi/151ppi/%E8%B5%84%E6%BA%90%203.jpg', // 资源 3.jpg — warm home plant shelf
-  factory:  'images/150ppi/151ppi/%E8%B5%84%E6%BA%90%207.jpg', // 资源 7.jpg — greenhouse w/ grow lights
+  hero:    'design_assets/hero_right.png',
+  logo:    'logo.jpg',
+  light:   'light.png',
+  map:     'MAP.png',
+  // 5 plant grid shots in design-order (left→right)
+  p1: '2.png', p2: '3.png', p3: '5.png', p4: '1.png', p5: '4.png',
+  // Two cards backgrounds (light Keep Real / light factory)
+  office:  '%E5%9B%BE%202x/%E7%94%BB%E6%9D%BF%2018%402x-100.jpg',
+  factory: '%E5%9B%BE%202x/%E7%94%BB%E6%9D%BF%2016%402x-100.jpg',
 };
 
 // placeholder SVG "photos" (kept as fallback only)
@@ -428,7 +433,9 @@ function App() {
           <a href="#" className="nav-link">系列产品</a>
         </div>
         <div className="nav-center">
-          <PPWordmark size={26} />
+          <a href="PlantPlus Homepage.html" aria-label="PlantPlus home">
+            <img src={IMG.logo} alt="PlantPlus" className="nav-logo-img" />
+          </a>
         </div>
         <div className="nav-right-group">
           <a href="#" className="nav-link">植加招聘</a>
@@ -457,12 +464,12 @@ function App() {
           <div className="map-left">
             <div className="map-kicker">GLOBAL PRESENCE MAP</div>
             <h2 className="map-title">全球覆盖<span className="map-title-hl">18个</span>国家</h2>
+            {/* keep span for green highlight on 18个 */}
             <p className="map-desc">从欧洲到美洲，从中东到亚太地区 — PlantPlus 产品深受全球<br/>用户喜爱。我们提供从研发到发货的全流程控制，保证品质和供应稳定。</p>
           </div>
           <div className="map-right">
-            <div className="map-sparkle">{sparkle}</div>
-            <div className="map-svg">{worldMap}</div>
-            <div className="map-footnote">*Indicates PlantPlus presence / distribution across regions.</div>
+            <div className="map-sparkle"><img src={IMG.light} alt="" /></div>
+            <div className="map-svg"><img src={IMG.map} alt="Global presence map" style={{display:'block', width:'100%', height:'auto'}} /></div>
           </div>
         </div>
         <div className="map-stats-wrap"><div className="map-stats">
@@ -487,24 +494,29 @@ function App() {
 
       {/* ===== IMAGE GRID ===== */}
       <section className="grid-section" data-section data-screen-label="03 Grid">
-        <div className="grid-row grid-row-single">
-          <img className="grid-panel-img" src={IMG.gridPanel} alt="PlantPlus product showcase" />
-          <a href="PlantPlus Products.html" className="grid-btn">解锁更多空间</a>
+        <div className="grid-row">
+          <div className="grid-cell grid-cell-1">
+            <img src={IMG.p1} alt="" />
+            <a href="PlantPlus Products.html" className="grid-btn">解锁更多空间</a>
+          </div>
+          <div className="grid-cell"><img src={IMG.p2} alt="" /></div>
+          <div className="grid-cell"><img src={IMG.p3} alt="" /></div>
+          <div className="grid-cell"><img src={IMG.p4} alt="" /></div>
+          <div className="grid-cell"><img src={IMG.p5} alt="" /></div>
         </div>
       </section>
 
       {/* ===== TWO CARDS ===== */}
       <section className="twocards-section" data-section data-screen-label="04 Cards">
         <div className="twocard">
-          <div className="twocard-photo"><img src={IMG.office} alt="PlantPlus office" /></div>
-          <div className="twocard-watermark">Keep Real</div>
+          <div className="twocard-photo"><img src={IMG.office} alt="" /></div>
           <a href="PlantPlus Careers.html" className="twocard-btn-top">加入我们</a>
           <div className="twocard-body">
             <h3 className="twocard-title">舒适的<br/>开放式办公空间</h3>
           </div>
         </div>
-        <div className="twocard">
-          <div className="twocard-photo"><img src={IMG.factory} alt="PlantPlus greenhouse" /></div>
+        <div className="twocard twocard--right">
+          <div className="twocard-photo"><img src={IMG.factory} alt="" /></div>
           <a href="PlantPlus Contact.html" className="twocard-btn-top">合作联系</a>
           <div className="twocard-body">
             <h3 className="twocard-title">欢迎各界合作伙伴</h3>
@@ -517,7 +529,7 @@ function App() {
         <div className="footer-new-inner">
           <div className="footer-new-left">
             <div className="footer-new-logo">
-              <PPWordmark size={40} color="white" />
+              <img src={IMG.logo} alt="PlantPlus" />
             </div>
             <div className="footer-new-slogan">LET PLANT LIGHTS UP PEOPLE'S LIFE</div>
             <div className="footer-new-contact">
@@ -579,6 +591,7 @@ function App() {
           </div>
         </div>
         <div className="footer-new-watermark">PlantPlus</div>
+        <div className="footer-sparkle"><img src={IMG.light} alt="" /></div>
         <div className="footer-new-bottom">
           <div className="footer-bottom-left">
             <span className="globe-dot">● Global · English</span>

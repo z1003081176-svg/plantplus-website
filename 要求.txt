@@ -1,0 +1,417 @@
+我需要你修改 PlantPlus 园艺品牌网站的首页样式,让它对齐设计稿。
+
+## 项目背景
+- 这是一个静态 HTML + React (通过 CDN 引入) 的项目
+- 样式 CSS 写在 `PlantPlus Homepage.html` 文件的 `<style>` 标签里
+- 主入口逻辑在 `app.jsx`
+- 项目根目录已有 `fonts/` 文件夹,里面有 4 个 Montserrat otf 字体文件
+
+## 任务清单
+
+### 1. 在 `PlantPlus Homepage.html` 的 `<style>` 标签内,把下面这段 CSS 追加到最后(在 `</style>` 之前)。注意 CSS 后面的规则会覆盖前面同名规则,所以追加即可生效:
+
+```css
+/* 粘贴下面的完整 CSS */
+```
+[/* ============================================
+   PlantPlus 首页 — 设计稿对齐修改
+   按问题分块,直接替换/合并到你现有 CSS 里
+   ============================================ */
+
+/* ===== [0] 字体引入 — 本地 otf =====
+   把 Fonts 文件夹放到项目静态资源目录,例如 public/fonts/
+   路径根据你的项目调整,下面假设是 /fonts/ */
+@font-face {
+  font-family: 'Montserrat';
+  src: url('/fonts/Montserrat-Medium-7.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Montserrat';
+  src: url('/fonts/Montserrat-SemiBold-9.otf') format('opentype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Montserrat';
+  src: url('/fonts/Montserrat-Bold-3.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Montserrat';
+  src: url('/fonts/Montserrat-ExtraBold-4.otf') format('opentype');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* CSS 变量 — 全局色 */
+:root {
+  --pp-green: #1CAD76;        /* 你给的精确色值 */
+  --pp-green-deep: #169466;   /* hover 用的深一档 */
+  --pp-yellow: #D4D83A;
+  --pp-text: #1a1a1a;
+  --pp-muted: #6b7280;
+  --font-en: 'Montserrat', -apple-system, sans-serif;
+  --font-cn: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+}
+
+body {
+  font-family: var(--font-cn);
+  color: var(--pp-text);
+}
+
+/* ============================================
+   [问题 2] 导航栏
+   ============================================ */
+.top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;                     /* 之前太高,压到 64px 更紧凑 */
+  padding: 0 40px;
+  background: #fff;
+  position: relative;
+  z-index: 50;
+}
+
+.nav-left-group,
+.nav-right-group {
+  display: flex;
+  align-items: center;
+  gap: 32px;                        /* 设计稿链接间距 */
+  flex: 1;
+}
+
+.nav-right-group {
+  justify-content: flex-end;
+}
+
+.nav-center {
+  flex-shrink: 0;
+}
+
+/* Logo 缩小 */
+.nav-logo-img {
+  height: 38px;                     /* 之前偏大,缩到 38px 接近设计稿 */
+  width: auto;
+  display: block;
+}
+
+/* 导航链接 — 字号缩小、字重调轻 */
+.nav-link {
+  font-family: var(--font-cn);
+  font-size: 14px;                  /* 之前偏大,设计稿是 14px */
+  font-weight: 500;
+  color: #1a1a1a;
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  transition: color .2s;
+}
+.nav-link:hover {
+  color: var(--pp-green);
+}
+
+/* 汉堡菜单 — 缩小 */
+.nav-hamburger {
+  width: 22px;
+  height: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+.nav-hamburger span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: #1a1a1a;
+  border-radius: 1px;
+}
+
+/* 搜索胶囊 */
+.nav-search-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 18px;                /* 设计稿尺寸 */
+  border: 1.5px solid var(--pp-green);
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #1a1a1a;
+  text-decoration: none;
+  background: transparent;
+  transition: all .2s;
+}
+.nav-search-pill:hover {
+  background: var(--pp-green);
+  color: #fff;
+}
+.nav-search-pill .search-icon {
+  font-size: 14px;
+  color: var(--pp-green);
+  transition: color .2s;
+}
+.nav-search-pill:hover .search-icon { color: #fff; }
+
+/* ============================================
+   [问题 1] Hero 区域
+   - 高度 65vh
+   - 左右比例 35/65
+   - 按钮紧贴标题下方
+   - 颜色 #1CAD76
+   ============================================ */
+.hero-split {
+  display: grid;
+  grid-template-columns: 35fr 65fr;   /* 关键:左右 35/65 */
+  height: 65vh;                        /* 关键:65vh */
+  min-height: 520px;
+  background: var(--pp-green);
+  overflow: hidden;
+}
+
+.hero-split-left {
+  background: var(--pp-green);
+  display: flex;
+  align-items: center;                 /* 垂直居中,内容自然居中 */
+  padding: 0 64px;
+}
+
+/* 内容包裹器 — 标题和按钮做成一组,垂直距离收紧 */
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 36px;                           /* 标题和按钮之间的距离 */
+}
+
+.hero-split-title {
+  font-family: var(--font-cn);
+  font-size: 56px;                     /* 之前偏大,根据设计稿压到 56 */
+  font-weight: 700;
+  line-height: 1.25;
+  color: #fff;
+  margin: 0;
+  letter-spacing: 0.02em;
+}
+
+/* 胶囊按钮 — 紧贴标题下方 */
+.hero-pill-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 28px;                  /* 之前偏大 */
+  background: #fff;
+  color: #1a1a1a;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 999px;
+  text-decoration: none;
+  transition: all .2s;
+  letter-spacing: 0.02em;
+}
+.hero-pill-btn:hover {
+  background: var(--pp-green-deep);
+  color: #fff;
+}
+
+/* 右侧图 — 完全填满,无缝衔接 */
+.hero-split-right {
+  position: relative;
+  overflow: hidden;
+}
+.hero-split-right img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+/* ============================================
+   [问题 3] Footer
+   - 用同一个绿色 #1CAD76
+   - 英文标题用 Montserrat
+   - 链接字号、字重、间距优化
+   ============================================ */
+.footer-new {
+  background: var(--pp-green);          /* 关键:统一绿色 */
+  color: #fff;
+  padding: 80px 64px 60px;
+  position: relative;
+}
+
+.footer-new-inner {
+  display: grid;
+  grid-template-columns: 1.4fr 2.6fr;    /* 左信息区 / 右链接区 */
+  gap: 80px;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+/* 左侧 logo + slogan + 联系方式 */
+.footer-new-logo img {
+  height: 56px;
+  width: auto;
+}
+
+.footer-new-slogan {
+  font-family: var(--font-en);          /* Montserrat */
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #fff;
+  margin-top: 24px;
+  margin-bottom: 40px;
+}
+
+.footer-new-contact {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.contact-block {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-family: var(--font-en);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.6;
+  color: rgba(255,255,255,0.92);
+}
+
+.contact-block strong {
+  font-weight: 700;
+  font-size: 13px;
+  color: #fff;
+  margin-bottom: 2px;
+}
+
+/* 右侧链接区 */
+.footer-new-links {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+}
+
+.footer-new-col h4 {
+  font-family: var(--font-en);          /* 关键:Montserrat */
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: #fff;
+  margin: 0 0 24px 0;
+}
+
+.footer-new-col ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.footer-new-col a {
+  font-family: var(--font-en);
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.92);
+  text-decoration: none;
+  transition: color .2s;
+  letter-spacing: 0.01em;
+}
+.footer-new-col a:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
+/* footer 装饰小星 */
+.footer-sparkle {
+  position: absolute;
+  right: 64px;
+  bottom: 40px;
+  width: 40px;
+  height: 40px;
+}
+.footer-sparkle img {
+  width: 100%;
+  height: 100%;
+}
+
+/* ============================================
+   响应式 — 移动端兜底
+   ============================================ */
+@media (max-width: 768px) {
+  .top-bar { padding: 0 20px; height: 56px; }
+  .nav-left-group, .nav-right-group { gap: 16px; }
+  .nav-link:not(.nav-lang) { display: none; }
+
+  .hero-split {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+  .hero-split-left { padding: 60px 32px; }
+  .hero-split-title { font-size: 36px; }
+  .hero-split-right { height: 320px; }
+
+  .footer-new { padding: 60px 24px 40px; }
+  .footer-new-inner { grid-template-columns: 1fr; gap: 48px; }
+  .footer-new-links { grid-template-columns: repeat(2, 1fr); }
+}]
+
+### 2. 修改 `app.jsx` 的 Hero 部分结构
+
+找到这段:
+```jsx
+<section className="hero-split" data-section data-screen-label="01 Hero">
+  <div className="hero-split-left">
+    <h1 className="hero-split-title">让植物<br/>点亮人类生活</h1>
+    <a href="PlantPlus Company.html" className="hero-pill-btn">构建你的园艺空间</a>
+  </div>
+  <div className="hero-split-right">
+    <img src={IMG.hero} alt="PlantPlus garden" />
+  </div>
+</section>
+```
+
+改成(在 hero-split-left 内部加一个 hero-content 包裹层):
+```jsx
+<section className="hero-split" data-section data-screen-label="01 Hero">
+  <div className="hero-split-left">
+    <div className="hero-content">
+      <h1 className="hero-split-title">让植物<br/>点亮人类生活</h1>
+      <a href="PlantPlus Company.html" className="hero-pill-btn">构建你的园艺空间</a>
+    </div>
+  </div>
+  <div className="hero-split-right">
+    <img src={IMG.hero} alt="PlantPlus garden" />
+  </div>
+</section>
+```
+
+### 3. 同时把 `app.jsx` 顶部的 TWEAK_DEFAULTS 里的 primaryColor 从 `#16A34A` 改成 `#1CAD76`
+
+### 4. 确认任务
+
+完成以上修改后,请:
+- 检查 `fonts/` 目录是否存在,里面是否有 4 个 otf 文件 (Montserrat-Medium-7.otf, Montserrat-SemiBold-9.otf, Montserrat-Bold-3.otf, Montserrat-ExtraBold-4.otf)
+- 如果文件名不一致,把 CSS 里 @font-face 的 url 路径改成实际的文件名
+- 修改完成后简要说明改了哪几处
+
+## 修改目标
+- Hero 区域:绿色 #1CAD76、高度 65vh、左右比例 35:65、按钮紧贴标题下方
+- 导航栏:整体更紧凑(高 64px)、Logo 缩小、链接字号 14px
+- Footer:背景同样用 #1CAD76、英文用 Montserrat 字体
+- 全站英文字体统一用本地 Montserrat otf

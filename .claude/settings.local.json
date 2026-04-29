@@ -1,7 +1,41 @@
 {
   "permissions": {
     "allow": [
-      "Bash(grep -iE '\\\\.\\(html|jpg|png\\)$')"
+      "Bash(grep -iE '\\\\.\\(html|jpg|png\\)$')",
+      "Bash(python -m http.server 8765)",
+      "Bash(curl -sS -o /dev/null -w \"%{http_code}\\\\n\" \"http://localhost:8765/PlantPlus%20Homepage.html\")",
+      "Bash(curl -sS -o /dev/null -w \"logo: %{http_code}\\\\n\" \"http://localhost:8765/logo.jpg\")",
+      "Bash(curl -sS -o /dev/null -w \"font: %{http_code}\\\\n\" \"http://localhost:8765/Fonts/Montserrat-Bold-3.otf\")",
+      "Bash(curl -sS -o /dev/null -w \"hero: %{http_code}\\\\n\" \"http://localhost:8765/%E5%9B%BE%202x/%E7%94%BB%E6%9D%BF%2014%402x-100.jpg\")",
+      "Bash(curl -sS -o /dev/null -w \"staff: %{http_code}\\\\n\" \"http://localhost:8765/images/150ppi/151ppi/%E8%B5%84%E6%BA%90%206.jpg\")",
+      "Bash(start *)",
+      "Bash(cp \"C:/Users/Administrator/Desktop/PP官网代码/pp官网 首页1.ai\" \"/tmp/pp_homepage1.pdf\")",
+      "Read(//tmp/**)",
+      "Bash(python -c \"import fitz; print\\('pymupdf ok'\\)\")",
+      "Bash(python -c \"import pdf2image; print\\('pdf2image ok'\\)\")",
+      "Bash(pip install *)",
+      "Bash(python -c \"import pymupdf; print\\('pymupdf', pymupdf.__doc__[:50] if pymupdf.__doc__ else 'ok'\\)\")",
+      "Bash(python *)",
+      "Bash(curl -sS -o /dev/null -w \"homepage: %{http_code}\\\\n\" \"http://localhost:8765/PlantPlus%20Homepage.html\")",
+      "Bash(curl -sS -o /dev/null -w \"hero: %{http_code}\\\\n\" \"http://localhost:8765/design_assets/hero_right.png\")",
+      "Bash(curl -sS -o /dev/null -w \"grid: %{http_code}\\\\n\" \"http://localhost:8765/design_assets/grid_full.png\")",
+      "Bash(curl -sS -o /dev/null -w \"cardL: %{http_code}\\\\n\" \"http://localhost:8765/design_assets/card_left.png\")",
+      "Bash(curl -sS -o /dev/null -w \"cardR: %{http_code}\\\\n\" \"http://localhost:8765/design_assets/card_right.png\")",
+      "Bash(curl -sS -o /dev/null -w \"MAP.png: %{http_code}\\\\n\" \"http://localhost:8765/MAP.png\")",
+      "Bash(curl -sS -o /dev/null -w \"card_left \\(画板18\\): %{http_code}\\\\n\" \"http://localhost:8765/%E5%9B%BE%202x/%E7%94%BB%E6%9D%BF%2018%402x-100.jpg\")",
+      "Bash(curl -sS -o /dev/null -w \"card_right \\(画板16\\): %{http_code}\\\\n\" \"http://localhost:8765/%E5%9B%BE%202x/%E7%94%BB%E6%9D%BF%2016%402x-100.jpg\")",
+      "Bash(curl -sS -o /dev/null -w \"hero_right: %{http_code}\\\\n\" \"http://localhost:8765/design_assets/hero_right.png\")",
+      "Bash(curl -sS -o /dev/null -w \"grid_clean: %{http_code}\\\\n\" \"http://localhost:8765/design_assets/grid_full_clean.png\")",
+      "Bash(curl -sS -o /dev/null -w \"MAP: %{http_code}\\\\n\" \"http://localhost:8765/MAP.png\")",
+      "Bash(curl -sS -o /dev/null -w \"sparkle: %{http_code}\\\\n\" \"http://localhost:8765/design_assets/sparkle.png\")",
+      "Bash(git checkout *)",
+      "Bash(curl -sS -o /dev/null -w \"1.png: %{http_code}\\\\n\" \"http://localhost:8765/1.png\")",
+      "Bash(curl -sS -o /dev/null -w \"5.png: %{http_code}\\\\n\" \"http://localhost:8765/5.png\")",
+      "Bash(curl -sS -o /dev/null -w \"light: %{http_code}\\\\n\" \"http://localhost:8765/light.png\")",
+      "Bash(curl -sS -o /dev/null -w \"card_left: %{http_code}\\\\n\" \"http://localhost:8765/%E5%9B%BE%202x/%E7%94%BB%E6%9D%BF%2018%402x-100.jpg\")",
+      "Bash(curl -sS -o /dev/null -w \"logo2: %{http_code}\\\\n\" \"http://localhost:8765/logo%202.png\")",
+      "Bash(curl -sS -o /dev/null -w \"card14: %{http_code}\\\\n\" \"http://localhost:8765/%E5%9B%BE%202x/%E7%94%BB%E6%9D%BF%2014%402x-100.jpg\")",
+      "Bash(curl -sS -o /dev/null -w \"card15: %{http_code}\\\\n\" \"http://localhost:8765/%E5%9B%BE%202x/%E7%94%BB%E6%9D%BF%2015%402x-100.jpg\")"
     ]
   }
 }
