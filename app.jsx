@@ -49,8 +49,8 @@ const IMG = {
   // 5 plant grid shots in design-order (left→right)
   p1: '2.png', p2: '3.png', p3: '5.png', p4: '1.png', p5: '4.png',
   // Two cards backgrounds (light Keep Real / light factory)
-  office:  '%E5%9B%BE%202x/%E7%94%BB%E6%9D%BF%2018%402x-100.jpg',
-  factory: '%E5%9B%BE%202x/%E7%94%BB%E6%9D%BF%2016%402x-100.jpg',
+  office:  'images_2x/card_18.jpg',
+  factory: 'images_2x/card_16.jpg',
 };
 
 // placeholder SVG "photos" (kept as fallback only)
