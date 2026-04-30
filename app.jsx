@@ -444,6 +444,9 @@ function App() {
             <SearchIcon size={14} />
             <span>搜索</span>
           </a>
+          <button className="nav-hamburger nav-hamburger--mobile" aria-label="menu">
+            <span></span><span></span><span></span>
+          </button>
         </div>
       </nav>
 
@@ -494,7 +497,7 @@ function App() {
 
       {/* ===== IMAGE GRID ===== */}
       <section className="grid-section" data-section data-screen-label="03 Grid">
-        <div className="grid-row">
+        <div className="grid-row grid-row--desktop">
           <div className="grid-cell grid-cell-1">
             <img src={IMG.p1} alt="" />
             <a href="PlantPlus Products.html" className="grid-btn">解锁更多空间</a>
@@ -504,6 +507,12 @@ function App() {
           <div className="grid-cell"><img src={IMG.p4} alt="" /></div>
           <div className="grid-cell"><img src={IMG.p5} alt="" /></div>
         </div>
+        <div className="grid-row grid-row--mobile">
+          <div className="grid-cell"><img src="2.png" alt="" /></div>
+          <div className="grid-cell"><img src="phone2.png" alt="" /></div>
+          <div className="grid-cell"><img src="phone3.png" alt="" /></div>
+        </div>
+        <a href="PlantPlus Products.html" className="grid-btn-mobile">解锁更多空间</a>
       </section>
 
       {/* ===== TWO CARDS ===== */}
@@ -523,6 +532,53 @@ function App() {
           </div>
         </div>
       </section>
+
+      {/* ===== Mobile-only: back to top + Chinese footer ===== */}
+      <button className="back-to-top-mobile" onClick={scrollToTop}>回到顶部</button>
+      <footer className="footer-mobile">
+        <div className="footer-mobile-brand">
+          <span className="pp-wordmark">
+            <span className="line1">Plant</span>
+            <span className="line2">Plus<span className="dot">.</span></span>
+          </span>
+        </div>
+        <div className="footer-mobile-section">
+          <h4>公司品牌</h4>
+          <ul>
+            <li><a href="PlantPlus Company.html">关于植加</a></li>
+            <li><a href="PlantPlus Company.html">使命和愿景</a></li>
+            <li><a href="PlantPlus Company.html">价值观</a></li>
+            <li><a href="PlantPlus Company.html">团队</a></li>
+          </ul>
+        </div>
+        <div className="footer-mobile-section">
+          <h4>产品简介</h4>
+          <ul>
+            <li><a href="PlantPlus Products.html">植物花架</a></li>
+            <li><a href="PlantPlus Products.html">花盆</a></li>
+            <li><a href="PlantPlus Products.html">水壶</a></li>
+            <li><a href="PlantPlus Products.html">植物灯</a></li>
+            <li><a href="PlantPlus Products.html">温室</a></li>
+            <li><a href="PlantPlus Products.html">园艺工具</a></li>
+          </ul>
+        </div>
+        <div className="footer-mobile-section">
+          <h4>植加招聘</h4>
+          <ul>
+            <li><a href="PlantPlus Careers.html">招聘价值观</a></li>
+            <li><a href="PlantPlus Careers.html">开放职位</a></li>
+          </ul>
+        </div>
+        <div className="footer-mobile-section">
+          <h4>业务合作</h4>
+          <ul>
+            <li><a href="PlantPlus Contact.html">地址</a></li>
+            <li><a href="PlantPlus Contact.html">邮箱</a></li>
+            <li><a href="PlantPlus Contact.html">电话</a></li>
+            <li><a href="PlantPlus Contact.html">业务目录</a></li>
+          </ul>
+        </div>
+      </footer>
 
       {/* ===== FOOTER ===== */}
       <footer className="footer-new" data-section data-screen-label="05 Footer">

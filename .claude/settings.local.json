@@ -41,7 +41,18 @@
       "Bash(git add *)",
       "Bash(git commit *)",
       "Bash(git push *)",
-      "Bash(ssh *)"
+      "Bash(ssh *)",
+      "Bash(mkdir -p _backup_before_rename)",
+      "Bash(cp -r images_2x _backup_before_rename/)",
+      "Bash(cp \"logo 2.png\" _backup_before_rename/)",
+      "Bash(cp app.jsx _backup_before_rename/)",
+      "Bash(cp -r components _backup_before_rename/)",
+      "Read(//c/c/Users/Administrator/Desktop/PP官网代码/_backup_before_rename/**)",
+      "Bash(mkdir -p _backup_before_rename/images/150ppi/151ppi)",
+      "Bash(cp \"images/150ppi/151ppi/资源 1.jpg\" _backup_before_rename/images/150ppi/151ppi/)",
+      "Bash(cp \"images/150ppi/151ppi/资源 2.jpg\" _backup_before_rename/images/150ppi/151ppi/)",
+      "Bash(cp \"images/150ppi/151ppi/资源 3.jpg\" _backup_before_rename/images/150ppi/151ppi/)",
+      "Bash(cp \"images/150ppi/151ppi/资源 4.jpg\" _backup_before_rename/images/150ppi/151ppi/)"
     ]
   }
 }

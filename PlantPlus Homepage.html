@@ -708,249 +708,363 @@ textarea {
 }
 
 /* ============================================================
-   Mobile — 横板缩小版(保持电脑端的横向布局结构,只缩小元素尺寸)
+   Mobile-only elements — hidden on desktop
+   ============================================================ */
+.grid-row--mobile,
+.grid-btn-mobile,
+.back-to-top-mobile,
+.footer-mobile,
+.nav-hamburger--mobile { display: none; }
+
+/* ============================================================
+   Mobile — 1:1 还原 phone.png 设计稿
    ============================================================ */
 @media (max-width: 768px) {
-    /* ----- 全局禁止横向滚动 ----- */
+    /* ----- 全局 ----- */
     html, body { overflow-x: hidden; }
+    body { font-size: 14px; }
     .design-canvas {
         width: 100%;
         max-width: 100%;
         overflow-x: hidden;
     }
 
-    /* ----- Nav ----- */
+    /* ----- Nav: only logo + search icon + hamburger ----- */
     .top-bar {
-        padding: 8px 12px;
+        padding: 12px 16px;
         gap: 8px;
+        grid-template-columns: auto 1fr auto;
     }
-    .nav-left-group, .nav-right-group { gap: 10px; padding: 0; }
-    .nav-link {
-        font-size: 9px;
-        letter-spacing: 0.2px;
+    .nav-link { display: none !important; }
+    .nav-left-group {
+        gap: 0;
+        padding: 0;
+        justify-content: flex-start;
     }
-    .nav-logo-img { height: 24px; }
+    .nav-left-group .nav-hamburger { display: none; }
+    .nav-center { justify-self: flex-start; }
+    .nav-logo-img { height: 28px; }
+    .nav-right-group {
+        gap: 12px;
+        padding: 0;
+        justify-content: flex-end;
+    }
     .nav-search-pill {
-        padding: 4px 10px;
-        font-size: 9px;
+        width: 36px;
+        height: 36px;
         min-width: 0;
-        gap: 4px;
-        border-width: 1px;
+        padding: 0;
+        gap: 0;
+        border-width: 1.5px;
+        border-radius: 50%;
+        justify-content: center;
     }
-    .nav-hamburger { width: 14px; height: 11px; margin-right: 0; }
+    .nav-search-pill span { display: none; }
+    .nav-hamburger--mobile {
+        display: flex;
+        width: 22px;
+        height: 16px;
+        margin: 0;
+        background: transparent;
+        border: none;
+        flex-direction: column;
+        justify-content: space-between;
+        cursor: pointer;
+        padding: 0;
+    }
+    .nav-hamburger--mobile span {
+        display: block;
+        height: 2px;
+        width: 100%;
+        background: var(--pp-text);
+    }
 
-    /* ----- Hero — 保持 40/60 左右两栏 ----- */
+    /* ----- Hero: image on top, green block overlapping bottom, button below ----- */
     .hero-split {
-        grid-template-columns: 40% 60%;
-        min-height: 280px;
+        display: flex;
+        flex-direction: column;
+        grid-template-columns: none;
+        position: relative;
+        min-height: 0;
         height: auto;
+        padding: 0 0 88px 0;
+        background: #fff;
         align-items: stretch;
     }
-    .hero-split-left {
-        min-height: 280px;
-        padding: 20px 12px;
-        gap: 12px;
-        align-items: flex-start;
-        justify-content: center;
-        text-align: left;
-    }
-    .hero-split-title {
-        font-size: 18px;
-        line-height: 1.25;
-        text-align: left;
-        white-space: normal;
-    }
-    .hero-pill-btn {
-        width: auto;
-        height: 32px;
-        padding: 0 14px;
-        font-size: 11px;
-        font-weight: 700;
-        letter-spacing: 0.3px;
-        align-self: flex-start;
-    }
     .hero-split-right {
-        min-height: 280px;
-        height: 280px;
+        order: 1;
+        width: 100%;
+        height: 320px;
+        min-height: 320px;
+        position: relative;
     }
     .hero-split-right img,
     .hero-split-right svg {
         position: absolute !important;
+        top: 0; left: 0;
+        width: 100% !important;
         height: 100% !important;
         min-height: 0 !important;
-        border-radius: 24px 0 0 24px !important;
+        border-radius: 0 !important;
+        object-fit: cover;
+    }
+    .hero-split-left {
+        order: 2;
+        margin-top: -64px;
+        margin-left: 25%;
+        width: 75%;
+        min-height: 0;
+        height: auto;
+        padding: 20px 20px 24px 24px;
+        background: var(--pp-green);
+        border-radius: 24px 0 0 0;
+        gap: 0;
+        display: flex;
+        align-items: flex-end;
+        justify-content: flex-start;
+        text-align: right;
+    }
+    .hero-split-title {
+        font-size: 28px;
+        line-height: 1.2;
+        color: #fff;
+        text-align: right;
+        white-space: normal;
+        font-weight: 800;
+        margin: 0;
+    }
+    .hero-pill-btn {
+        position: absolute;
+        bottom: 24px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: auto;
+        height: 40px;
+        padding: 0 24px;
+        background: #fff;
+        color: var(--pp-green);
+        border: 2px solid var(--pp-green);
+        border-radius: 999px;
+        font-size: 14px;
+        font-weight: 700;
+        letter-spacing: 0.3px;
+        margin: 0;
+        align-self: auto;
     }
 
-    /* ----- Map — 保持 1fr 1.1fr 左右两栏 ----- */
-    .map-section { padding: 32px 16px; }
+    /* ----- Map: stacked single column, 4-stat row ----- */
+    .map-section { padding: 32px 20px; }
     .map-inner {
-        grid-template-columns: 1fr 1.1fr;
+        display: block;
+        grid-template-columns: 1fr;
         gap: 16px;
+        max-width: 100%;
     }
     .map-kicker {
-        font-size: 11px;
-        letter-spacing: 0.3px;
-        margin-bottom: 8px;
+        font-size: 13px;
+        letter-spacing: 0.5px;
+        margin-bottom: 6px;
+        color: var(--pp-green);
     }
     .map-title {
-        font-size: 20px;
+        font-size: 28px;
         line-height: 1.2;
-        margin-bottom: 10px;
+        margin-bottom: 12px;
     }
     .map-desc {
-        font-size: 10px;
-        line-height: 1.5;
+        font-size: 13px;
+        line-height: 1.7;
         max-width: none;
+        color: #4a4a4a;
+        font-weight: 400;
     }
-    .map-right { min-height: auto; }
-    .map-sparkle { width: 28px; top: -14px; right: 4px; }
+    .map-right { min-height: auto; margin-top: 16px; position: relative; }
+    .map-sparkle { width: 36px; top: -8px; right: 8px; }
+    .map-stats-wrap { margin-top: 16px; }
     .map-stats {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 12px 16px;
-        margin: 20px 0 0;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 6px;
+        margin: 0;
         max-width: none;
     }
-    .stat-card { padding: 4px 8px; border-left-width: 2px; }
+    .stat-card {
+        padding: 4px 6px;
+        border-left-width: 2px;
+        border-left-color: var(--pp-green);
+    }
     .stat-label {
-        font-size: 10px;
+        font-size: 9px;
         margin-bottom: 4px;
         letter-spacing: 0.2px;
+        line-height: 1.2;
+        color: var(--pp-green);
     }
-    .stat-value { font-size: 18px; }
-    .stat-value span { font-size: 9px; margin-left: 2px; }
-
-    /* ----- Grid — 保持 5 列横排 ----- */
-    .grid-section { padding: 16px 0; }
-    .grid-row {
-        display: grid;
-        grid-template-columns: repeat(5, 1fr);
-        gap: 0;
-        overflow: visible;
-        padding: 0;
+    .stat-value {
+        font-size: 22px;
+        font-weight: 700;
+        line-height: 1.1;
     }
-    .grid-cell {
-        aspect-ratio: 2 / 5;
-        flex: none;
-    }
-    .grid-btn {
-        padding: 6px 12px;
-        font-size: 10px;
-        font-weight: 600;
-        left: 4%;
-        bottom: 4%;
-        letter-spacing: 0.2px;
-        right: auto;
-        width: auto;
-        height: auto;
-        min-height: 0;
+    .stat-value span {
+        font-size: 9px;
+        margin-left: 2px;
+        display: block;
+        color: #888;
+        font-weight: 400;
     }
 
-    /* ----- Two cards — 保持 1fr 1fr ----- */
+    /* ----- Grid: hide desktop row, show mobile carousel ----- */
+    .grid-section { padding: 24px 0 16px; }
+    .grid-row--desktop { display: none !important; }
+    .grid-row--mobile {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        gap: 12px;
+        padding: 0 16px;
+    }
+    .grid-row--mobile::-webkit-scrollbar { display: none; }
+    .grid-row--mobile .grid-cell {
+        flex: 0 0 100%;
+        scroll-snap-align: center;
+        aspect-ratio: 4 / 3;
+        border-radius: 16px;
+        overflow: hidden;
+        background: #ececec;
+    }
+    .grid-row--mobile .grid-cell img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+    .grid-section { display: flex; flex-direction: column; align-items: stretch; }
+    .grid-btn-mobile {
+        display: flex;
+        margin: 16px auto 0;
+        padding: 10px 28px;
+        background: #fff;
+        color: var(--pp-green);
+        border: 2px solid var(--pp-green);
+        border-radius: 999px;
+        font-size: 14px;
+        font-weight: 700;
+        letter-spacing: 0.3px;
+        text-decoration: none;
+        align-items: center;
+        justify-content: center;
+        width: fit-content;
+        font-family: 'Montserrat', "PingFang SC", "Microsoft YaHei", sans-serif;
+    }
+
+    /* ----- Two cards: stacked, big centered green pill button ----- */
     .twocards-section {
-        grid-template-columns: 1fr 1fr;
-        padding: 16px 12px;
-        gap: 8px;
+        display: flex;
+        flex-direction: column;
+        grid-template-columns: 1fr;
+        padding: 16px;
+        gap: 12px;
         max-width: 100%;
     }
     .twocard {
         min-height: 180px;
-        border-radius: 3px;
+        border-radius: 16px;
     }
-    .twocard-title {
-        font-size: 12px;
-        line-height: 1.35;
-        letter-spacing: 0.02em;
-    }
+    .twocard-body { display: none; }
+    .twocard-watermark { display: none; }
     .twocard-btn-top {
-        padding: 6px 12px;
-        font-size: 10px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        right: auto;
+        transform: translate(-50%, -50%);
+        padding: 10px 28px;
+        font-size: 14px;
         font-weight: 700;
         letter-spacing: 0.3px;
-        top: 12px;
-        right: 12px;
+        background: var(--pp-green);
+        color: #fff;
+        border-radius: 999px;
+        z-index: 10;
+        white-space: nowrap;
     }
-    .twocard-watermark {
-        font-size: 16px;
-        top: 10px;
-        left: 12px;
-    }
-    .twocard-body {
-        padding: 0 12px 12px;
+    .twocard-btn-top::after {
+        content: ' ›';
+        margin-left: 4px;
     }
 
-    /* ----- Footer — 保持左 logo 右 4 列 ----- */
-    .footer-new {
-        padding: 24px 16px;
+    /* ----- Back to top button (mobile only) ----- */
+    .back-to-top-mobile {
+        display: flex;
+        margin: 24px auto 8px;
+        padding: 10px 28px;
+        background: #fff;
+        color: var(--pp-green);
+        border: 2px solid var(--pp-green);
+        border-radius: 999px;
+        font-size: 14px;
+        font-weight: 700;
+        letter-spacing: 0.3px;
+        cursor: pointer;
+        align-items: center;
+        justify-content: center;
+        width: fit-content;
+        font-family: 'Montserrat', "PingFang SC", "Microsoft YaHei", sans-serif;
     }
-    .footer-new-inner {
-        grid-template-columns: 1.2fr 2.5fr;
-        gap: 16px;
-        max-width: 100%;
-        padding-bottom: 24px;
+
+    /* ----- Hide DESKTOP footer, show MOBILE footer ----- */
+    .footer-new { display: none !important; }
+    .scroll-top { display: none !important; }
+
+    .footer-mobile {
+        display: block;
+        background: #fff;
+        color: var(--pp-text);
+        padding: 24px 24px 32px;
     }
-    .footer-new-logo {
-        width: 80px;
-        height: 26px;
+    .footer-mobile-brand { margin-bottom: 8px; }
+    .footer-mobile-brand .pp-wordmark {
+        display: inline-block;
+        font-size: 96px;
+        color: var(--pp-green);
+        line-height: 0.85;
+        font-weight: 900;
+        letter-spacing: -0.02em;
     }
-    .footer-new-slogan {
-        font-size: 8px;
-        margin: 8px 0 12px;
-        letter-spacing: 0.6px;
+    .footer-mobile-brand .pp-wordmark .dot { color: var(--pp-yellow); }
+    .footer-mobile-section {
+        margin-top: 24px;
+        padding-top: 16px;
+        border-top: 1px solid #eee;
     }
-    .footer-new-contact {
-        gap: 8px;
-        font-size: 8px;
-        max-width: 100%;
+    .footer-mobile-section:first-of-type {
+        border-top: none;
+        padding-top: 0;
     }
-    .contact-block { gap: 1px; }
-    .contact-block strong {
-        font-size: 8px;
-        margin-bottom: 1px;
-        letter-spacing: 0.1px;
+    .footer-mobile-section h4 {
+        font-size: 15px;
+        font-weight: 700;
+        color: var(--pp-green);
+        margin-bottom: 12px;
+        letter-spacing: 0.02em;
     }
-    .contact-block span {
-        font-size: 7.5px;
-        line-height: 1.4;
-    }
-    .footer-new-links {
-        grid-template-columns: repeat(4, 1fr);
-        gap: 8px;
-    }
-    .footer-new-col h4 {
-        font-size: 8px;
-        margin-bottom: 8px;
-        letter-spacing: 0.4px;
-    }
-    .footer-new-col ul { gap: 4px; }
-    .footer-new-col li { margin-bottom: 4px; }
-    .footer-new-col a {
-        font-size: 8px;
-        letter-spacing: 0.1px;
-    }
-    .footer-new-watermark {
-        font-size: 60px;
-        bottom: 12px;
-        opacity: 0.18;
-    }
-    .footer-sparkle {
-        width: 48px;
-        right: 12px;
-        bottom: 12px;
-    }
-    .footer-new-bottom {
-        position: static;
+    .footer-mobile-section ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
         flex-direction: column;
-        align-items: flex-start;
-        gap: 4px;
-        font-size: 7.5px;
-        margin-top: 12px;
-        padding-top: 8px;
-        left: auto;
-        right: auto;
-        bottom: auto;
+        gap: 8px;
     }
-    .footer-bottom-left,
-    .footer-bottom-right { font-size: 7.5px; }
+    .footer-mobile-section li { margin: 0; }
+    .footer-mobile-section a {
+        color: #6b7c73;
+        text-decoration: none;
+        font-size: 14px;
+        line-height: 1.5;
+    }
 }
 
 </style>
